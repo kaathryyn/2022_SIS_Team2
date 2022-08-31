@@ -37,11 +37,16 @@ const CONFIG = {
 
 const client = new vision.ImageAnnotatorClient(CONFIG);
 
-const imgPath = "gs://cloud-samples-data/vision/landmark/st_basils.jpeg";
+// const imgPath = "gs://cloud-samples-data/vision/landmark/st_basils.jpeg";
+const imgPath = "./test_landmarks/sydney-opera-house-selfie.jpg";
 
+// landmarkAnnotations[0] = result with highest score (match)
 const detectLandmark = async (img) => {
   let [result] = await client.landmarkDetection(imgPath);
-  console.log(result.landmarkAnnotations[0].description);
+    if (result.landmarkAnnotations[0]) {
+      console.log(result.landmarkAnnotations[0].description);
+    }
+    else console.log("No famous landmark detected.");
 }
 
 detectLandmark();
