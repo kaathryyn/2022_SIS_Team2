@@ -42,11 +42,19 @@ const imgPath = "./test_landmarks/sydney-opera-house-selfie.jpg";
 
 // landmarkAnnotations[0] = result with highest score (match)
 const detectLandmark = async (img) => {
-  let [result] = await client.landmarkDetection(imgPath);
+  let [result] = await client.landmarkDetection(img);
+  console.log("\nImage:", img)
     if (result.landmarkAnnotations[0]) {
       console.log(result.landmarkAnnotations[0].description);
     }
     else console.log("No famous landmark detected.");
 }
 
-detectLandmark();
+// detectLandmark(imgPath);
+
+
+console.log("Batch Read");
+const fs = require("fs");
+const path = require("path");
+const files = fs.readdirSync(path.resolve("test_landmarks"));
+files.forEach((path) => detectLandmark("./test_landmarks/" + path));
