@@ -23,5 +23,8 @@
   "homepage": "https://github.com/kaathryyn/2022_SIS_Team2#readme",
   "dependencies": {
     "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "node-sass": "^7.0.1"
   }
 }
