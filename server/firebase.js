@@ -11,8 +11,10 @@ const FIREBASE_CONFIG = {
   appId: "1:672994537716:web:4a7af45030ed42b1782ea1"
 };
 
-initializeApp({
+if (initializeApp({
   credential: applicationDefault(),
-  projectId: 'Spr22_SIS_Team2',
-  storageBucket: 'spr22-sis-team2.appspot.com'
-});
+  projectId: FIREBASE_CONFIG.projectId,
+  storageBucket: FIREBASE_CONFIG.storageBucket
+}))
+  console.log("Firebase app started!");
+else console.log("Error! Cannot start Firebase application :(");

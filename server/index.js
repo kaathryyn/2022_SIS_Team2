@@ -14,7 +14,6 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const { default: vision } = require("./vision");
-const firebase = require('./firebase');
 
 const app = express();
 const server = http.createServer(app);
