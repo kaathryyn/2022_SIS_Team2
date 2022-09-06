@@ -11,10 +11,14 @@ const FIREBASE_CONFIG = {
   appId: "1:672994537716:web:4a7af45030ed42b1782ea1"
 };
 
-if (initializeApp({
-  credential: applicationDefault(),
-  projectId: FIREBASE_CONFIG.projectId,
-  storageBucket: FIREBASE_CONFIG.storageBucket
-}))
-  console.log("Firebase app started!");
-else console.log("Error! Cannot start Firebase application :(");
+try {
+  initializeApp({
+    credential: applicationDefault(),
+    projectId: FIREBASE_CONFIG.projectId,
+    storageBucket: FIREBASE_CONFIG.storageBucket
+  });
+  console.log("Firebase app is now running...")
+}
+catch(err) {
+  console.log("Error! Firebase app cannot start :(")
+}
