@@ -31,15 +31,16 @@ var img = "gs://cloud-samples-data/vision/landmark/st_basils.jpeg"
 async function detectLandmark(img) {
     const client = new vision.ImageAnnotatorClient(CONFIG);
 
-    const [result] = await client.labelDetection(img);
-    const landmark = result.landmarkAnnotations;
+    const [result] = await client.landmarkDetection(img);
+    const landmarks = result.landmarkAnnotations;
     
     // landmarkAnnotations[0] = result with highest score (match)
-    if (result.landmarkAnnotations[0]) {
-        console.log(`Landmark identified for file ${img}: ${landmark}`);
+    if (landmarks[0]?.description) {
+        console.log(`Landmark identified for file ${img}:`);
+        landmarks.forEach(l=>console.log(l.description));
     } 
-    else console.log("No famous landmark detected.");
-    
+    else console.log(`No famous landmark detected for file ${img}`);
+    console.log("----------------------------------------------------------------------------------------------------");
 }
 
 detectLandmark(img);
@@ -47,8 +48,12 @@ detectLandmark(img);
 ////////////////////////////
 ///////--- Tests ---////////
 ////////////////////////////
-// console.log("Batch Read");
-// const fs = require("fs");
-// const path = require("path");
-// const files = fs.readdirSync(path.resolve("test_landmarks"));
-// files.forEach((path) => detectLandmark("./test_landmarks/" + path));
+console.log("====================================================================================================");
+console.log("Beginning Tests...");
+console.log("Batch Read");
+console.log("====================================================================================================");
+const fs = require("fs");
+const path = require("path");
+const files = fs.readdirSync(path.resolve("test_landmarks"));
+files.forEach((path) => detectLandmark("./test_landmarks/" + path));
+// console.log("====================================================================================================");
