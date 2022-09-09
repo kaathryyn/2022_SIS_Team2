@@ -29,7 +29,17 @@ io.on('connection', socket => {
 
 const PORT = 3001 || process.env.PORT;
 
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+app.use(express.urlencoded()); // Change this for different HTTP bodies
+app.get('/', (req, res)=>{
+    console.log(req.headers);
+    res.send("Welcome to your server");
+});
+app.post('/', (req, res)=>{
+    console.log(req.body);
+    res.send("Successful post");
+});
+
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 require("./vision");
 require("./firebase");
