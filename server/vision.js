@@ -43,7 +43,7 @@ async function detectLandmark(img) {
     console.log("----------------------------------------------------------------------------------------------------");
 }
 
-detectLandmark(img);
+// detectLandmark(img);
 
 ////////////////////////////
 ///////--- Tests ---////////
@@ -55,5 +55,5 @@ console.log("===================================================================
 const fs = require("fs");
 const path = require("path");
 const files = fs.readdirSync(path.resolve("test_landmarks"));
-files.forEach((path) => detectLandmark("./test_landmarks/" + path));
+// files.forEach((path) => detectLandmark("./test_landmarks/" + path));
 // console.log("====================================================================================================");
