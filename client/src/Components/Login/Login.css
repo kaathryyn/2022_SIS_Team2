@@ -1,4 +1,7 @@
 .login-div{
+    background-image:url("../../Assets/Background.svg");
+    background-position-x: right;
+    background-position-y: center;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -7,48 +10,51 @@
     justify-content: left;
 }
 
+.main-logo{
+    width: 20%;
+    margin-left: 2em;
+    margin-top: 2em;
+}
+
 .login-card{
     display: flex;
     flex-direction: column;
-    background-color: rgba(189, 152, 107, 0.75);
-    width: 50%;
-    height: 100vh;
 }
 
 .login-form{
     display: flex;
     flex-direction: column;
-    background-color: rgba(218, 173, 134, 0.75);
-    margin-top: 3em;
     margin-left: 3em;
     margin-right: 3em;
-    margin-bottom: 3em;
-    height: 100vh;
+    margin-bottom: 1em;
+    width: 50%;
 }
 
 .form-header{
     font-weight: 350;
     font-size: 45px;
-    color: white;
-    margin-right: 8em;
+    color: black;
+    margin-right: 9.3em;
 }
 
 .username-div{
-    margin-top: 0.5em;
+    margin-top: 0.1em;
 }
 
 .username-label{
-    font-weight: 200;
+    font-weight: 300;
     font-size: 20px;
-    color: white;
-    margin-right: 18em;
+    color: black;
+    margin-right: 22em;
 }
 
 .input-field{
-    background: rgb(251, 238, 193);
+    background: #E8E6E2;
+    border-radius: 5px;
     border: none;
-    width: 81%;
+    width: 60%;
     height: 2em;
+    margin-right: 10.3em;
 }
 
 .password-div{
@@ -56,42 +62,45 @@
 }
 
 .password-label{
-    font-weight: 200;
+    font-weight: 300;
     font-size: 20px;
-    color: white;
-    margin-right: 18em;
+    color: black;
+    margin-right: 22em;
 }
 
 .forgot-password{
-    font-weight: 200;
+    font-weight: 300;
     font-size: 20px;
-    color: white;
-    margin-right: 15.5em;
+    color: black;
+    margin-right: 18.5em;
 }
 
 .button-div{
     display: flex;
     flex-direction: row;
+    margin-top: 1em;
 }
 
 .login-button{
-    background-color: rgb(251, 238, 193);
+    background-color: #688C40;
     border: none;
+    border-radius: 5px;
     color: black;
-    width: 30%;
+    width: 20%;
     height: 3.5em;
-    margin-left: 3.1em;
+    margin-left: 3.8em;
     font-size: 1em;
     font-weight: 200;
 }
 
 .register-button{
-    background-color: rgb(251, 238, 193);
+    background-color: #688C40;
     border: none;
+    border-radius: 5px;
     color: black;
-    width: 30%;
+    width: 20%;
     height: 3.5em;
-    margin-left: 7em;
+    margin-left: 7.8em;
     font-size: 1em;
     font-weight: 200;
 }
