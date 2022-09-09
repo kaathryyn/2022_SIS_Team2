@@ -10,3 +10,6 @@ Logo (Draft)
 
 Suggested Colour Scheme  
 ![Colour Scheme](https://user-images.githubusercontent.com/48664916/188054962-43eeec7e-6920-44bd-bf43-473672e892e3.png)
+
+Draft Wireframe  
+https://www.figma.com/file/Ftvp4pslR6lsg5tnOGCcg8/monument.io?node-id=0%3A1
