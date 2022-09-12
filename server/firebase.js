@@ -1,4 +1,6 @@
+import firebase from 'firebase/app';
 const { initializeApp, applicationDefault } = require('firebase-admin/app');
+import { auth } from 'firebase/auth';
 
 const SERVICE_ACCOUNT = require('../firebase_key.json');
 
@@ -22,3 +24,12 @@ try {
 catch(err) {
   console.log("Error! Firebase app cannot start :(")
 }
+
+export const auth = firebase.auth();
+
+const provider = new firebase.auth.GoogleAuthProvider();
+provider.sedtCustomParameters({ prompt: 'select_account' });
+
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+export default firebase;
