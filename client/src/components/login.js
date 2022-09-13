@@ -1,6 +1,12 @@
 import { GoogleLogin } from 'react-google-login';
+import { GoogleAuthProvider, getAuth, useDeviceLanguage } from 'firebase/auth';
+import firebase from 'firebase';
 
 function Login() {
+
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+    firebase.auth().useDeviceLanguage();
 
     const onSuccess = (res) => {
         console.log("LOGIN SUCCESS! Current user: ", res.profileObj);
