@@ -13,7 +13,7 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-const { default: vision } = require("./vision");
+// const { default: vision } = require("./vision");
 
 const app = express();
 const server = http.createServer(app);
@@ -29,13 +29,26 @@ io.on('connection', socket => {
 
 const PORT = 3001 || process.env.PORT;
 
-app.use(express.urlencoded()); // Change this for different HTTP bodies
+
+const multer = require("multer");
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'server/uploads');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+var upload = multer({ storage: storage });
+
+app.use(express.json());
+app.use(express.urlencoded({extended:true})); // Change this for different HTTP bodies
 app.get('/', (req, res)=>{
     console.log(req.headers);
     res.send("Welcome to your server");
 });
-app.post('/', (req, res)=>{
-    console.log(req.body);
+app.post('/upload', upload.single("image"), (req, res)=>{
+    console.log(req.image);
     res.send("Successful post");
 });
 
