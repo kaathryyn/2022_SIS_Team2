@@ -1,5 +1,6 @@
 // VISION API
 const vision = require("@google-cloud/vision");
+const { ok } = require("assert");
 
 const CREDENTIALS = JSON.parse(
     JSON.stringify({
@@ -41,6 +42,7 @@ async function detectLandmark(img) {
     } 
     else console.log(`No famous landmark detected for file ${img}`);
     console.log("----------------------------------------------------------------------------------------------------");
+    return true;
 }
 
 // detectLandmark(img);
@@ -54,6 +56,12 @@ console.log("Batch Read");
 console.log("====================================================================================================");
 const fs = require("fs");
 const path = require("path");
-const files = fs.readdirSync(path.resolve("test_landmarks"));
+const files = fs.readdirSync(path.resolve(process.env.TEST_LOC));
 // files.forEach((path) => detectLandmark("./test_landmarks/" + path));
 // console.log("====================================================================================================");
+
+
+
+
+// Exposure points
+module.exports = { detectLandmark };
