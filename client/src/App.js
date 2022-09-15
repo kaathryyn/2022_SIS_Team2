@@ -3,9 +3,10 @@ import './App.css';
 
 //Importing Components
 import Login from "./Components/Login/Login.js";
-
+import Navbar from "./Components/Navbar/sidebar.js";
 function App() {
   return (
+    
     <BrowserRouter>
       <Routes>
         <Route
@@ -15,11 +16,21 @@ function App() {
               <Login/>
             </div>
               
-          }
+          }  
+        />
+         <Route
+          path="/navbar"
+          element={
+            <div className="App">
+              <Navbar/>
+            </div>
+              
+          }  
         />
       </Routes>
     </BrowserRouter>
   );
+
 }
 
 export default App;
