@@ -21,7 +21,6 @@ body {
   transition: color 0.2s;
 }
 
-<<<<<<< HEAD
 .App-Header {
   background-color: #282c34;
   min-height: 100vh;
@@ -30,9 +29,6 @@ body {
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-=======
-.bm-item:hover {
->>>>>>> ccddadee631f2d639a6b791b82b7eb046a1f0119
   color: white;
 }
 

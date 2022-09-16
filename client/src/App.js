@@ -3,12 +3,9 @@ import './App.css';
 
 //Importing Components
 import Login from "./Components/Login/Login.js";
-<<<<<<< HEAD
-import Signup from "./Components/Signup/Signup.js";
-
-=======
+import Signup from "./Components/SignUp/Signup.js";
 import Navbar from "./Components/Navbar/sidebar.js";
->>>>>>> ccddadee631f2d639a6b791b82b7eb046a1f0119
+
 function App() {
   return (
     

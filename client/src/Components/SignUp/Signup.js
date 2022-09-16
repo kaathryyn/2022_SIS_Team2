@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from "../../Assets/Main-Logo.png";
-import './Signup.css'
+import './signup.css'
 function SignUp() {
     
     return(
