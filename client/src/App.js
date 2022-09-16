@@ -3,7 +3,7 @@ import './App.css';
 
 //Importing Components
 import Login from "./Components/Login/Login.js";
-import Signup from "./Components/SignUp/Signup.js";
+import Signup from "./Components/Signup/Signup.js";
 
 function App() {
   return (
@@ -19,17 +19,17 @@ function App() {
           }
         />
          <Route
-          path="/signup"
+          path="/Signup"
           element={
             <div className="App">
-              <Signup/>
+            
+            <Signup/>
+
             </div>
-              
           }
         />
       </Routes>
     </BrowserRouter>
   );
 }
-
 export default App;

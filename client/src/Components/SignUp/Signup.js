@@ -1,60 +1,43 @@
-import "./signup.css";
-
+import React from 'react';
 import logo from "../../Assets/Main-Logo.png";
-
-function Signup(props){
-    console.log(props.history)
+import './Signup.css'
+function SignUp() {
+    
     return(
-        <div className="signup-div">
-                <img
+      <div className="form">
+        <img
                     alt="Main Logo"
                     src={logo}
                     className="main-logo"
                 ></img>
-            <div className="SignUp-card">
-                <form className="SignUp-form">
-                    <h1 className="form-header"> Register</h1>
-                    <div className="FirstName-div">
-                        <h3 className="username-label">FirstName</h3>
-                        <input className="input-field">
-
-                        </input>
-                    </div>
-
-                    <div className="LastName-div">
-                        <h3 className="username-label">LastName</h3>
-                        <input className="input-field">
-
-                        </input>
-                    </div>
-
-                    <div className="username-div">
-                        <h3 className="username-label">Username</h3>
-                        <input className="input-field">
-
-                        </input>
-                    </div>
-                    <div className="password-div">
-                        <h3 className="password-label">Password</h3>
-                        <input className="input-field">
-                        </input>
-                        
-                    </div>
-                    <div className="Password-div">
-                    <h3 className="forgot-password">ConformYourPassword?</h3>
-                        <input className="input-field">
-
-                        </input>
-                    </div>
-                    <div className="button-div">
-                        <button className="login-button">Signup</button>
-                        <button className="register-button" onClick={() => props.history.push("/Login")}>Login</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    )
+          <div className="form-body">
+              <div className="username">
+                  <label className="form__label" for="firstName">First Name </label>
+                  <input className="form__input" type="text" id="firstName" placeholder="First Name"/>
+              </div>
+              <div className="lastName">
+                  <label className="form__label" for="lastName">Last Name </label>
+                  <input  type="text" name="" id="lastName"  className="form__input"placeholder="LastName"/>
+              </div>
+              <div className="email">
+                  <label className="form__label" for="email">Email </label>
+                  <input  type="email" id="email" className="form__input" placeholder="Email"/>
+              </div>
+              <div className="password">
+                  <label className="form__label" for="password">Password </label>
+                  <input className="form__input" type="password"  id="password" placeholder="Password"/>
+              </div>
+              <div className="confirm-password">
+                  <label className="form__label" for="confirm">Confirm </label>
+                  <input className="form__input" type="password" id="confirm" placeholder="Confirm"/>
+              </div>
+          </div>
+          <div class="footer">
+              <button type="submit" class="btn">Register</button>
+          </div>
+          
+          
+      </div>      
+    )       
 }
-
-export default Signup;
+export default SignUp;

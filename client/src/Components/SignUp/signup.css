@@ -1,4 +1,4 @@
-.signup-div{
+.Signup-div{
     background-image:url("../../Assets/Background.svg");
     background-position-x: right;
     background-position-y: center;
@@ -9,98 +9,40 @@
     align-items: left;
     justify-content: left;
 }
-
+body{
+    background: #1f7b1c;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, hsl(139, 76%, 25%), #129c1e);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #0a9353, #068b1f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 .main-logo{
-    width: 20%;
+    width: 40%;
     margin-left: 2em;
     margin-top: 2em;
 }
-
-.signup-card{
-    display: flex;
-    flex-direction: column;
-}
-
-.signup-form{
-    display: flex;
-    flex-direction: column;
-    margin-left: 3em;
-    margin-right: 3em;
-    margin-bottom: 1em;
-    width: 30%;
-}
-
-.form-header{
-    font-weight: 350;
-    font-size: 45px;
-    color: black;
-    margin-right: 9.3em;
-}
-
-.username-div{
-    margin-top: 0.1em;
-}
-
-.username-label{
-    font-weight: 300;
-    font-size: 20px;
-    color: black;
-    margin-right: 22em;
-}
-
-.input-field{
-    background: #E8E6E2;
+.form{
+    background-color: white;
     border-radius: 5px;
-    border: none;
+    width: 550px;
+    margin: 20px auto;
+    padding: 20px;
+    /* height: 600px; */
+}
+.form-body{
+    text-align: left;
+    padding: 20px 10px;
+}
+
+.form-body > *{
+    padding: 5px;
+}
+
+.form__label{
+    width: 40%;
+}
+form_input{
     width: 60%;
-    height: 2em;
-    margin-right: 10.3em;
+}
+.footer{
+    text-align: center;
 }
 
-.password-div{
-    margin-top: 0.5em;
-}
-
-.password-label{
-    font-weight: 300;
-    font-size: 20px;
-    color: black;
-    margin-right: 22em;
-}
-
-.forgot-password{
-    font-weight: 300;
-    font-size: 20px;
-    color: black;
-    margin-right: 18.5em;
-}
-
-.button-div{
-    display: flex;
-    flex-direction: row;
-    margin-top: 1em;
-}
-
-.login-button{
-    background-color: #688C40;
-    border: none;
-    border-radius: 5px;
-    color: black;
-    width: 20%;
-    height: 3.5em;
-    margin-left: 3.8em;
-    font-size: 1em;
-    font-weight: 200;
-}
-
-.register-button{
-    background-color: #688C40;
-    border: none;
-    border-radius: 5px;
-    color: black;
-    width: 20%;
-    height: 3.5em;
-    margin-left: 7.8em;
-    font-size: 1em;
-    font-weight: 200;
-}
