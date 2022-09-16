@@ -3,6 +3,7 @@ import './App.css';
 
 //Importing Components
 import Login from "./Components/Login/Login.js";
+import Signup from "./Components/SignUp/Signup.js";
 
 function App() {
   return (
@@ -13,6 +14,15 @@ function App() {
           element={
             <div className="App">
               <Login/>
+            </div>
+              
+          }
+        />
+         <Route
+          path="/signup"
+          element={
+            <div className="App">
+              <Signup/>
             </div>
               
           }

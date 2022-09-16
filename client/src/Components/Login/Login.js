@@ -2,7 +2,8 @@ import "./Login.css";
 
 import logo from "../../Assets/Main-Logo.png";
 
-function Login(){
+function Login(props){
+    console.log(props.history)
     return(
         <div className="login-div">
                 <img
@@ -28,7 +29,7 @@ function Login(){
                     </div>
                     <div className="button-div">
                         <button className="login-button">Login</button>
-                        <button className="register-button">Register</button>
+                        <button className="register-button" onClick={() => props.history.push("/signup")}>Register</button>
                     </div>
                 </form>
 
