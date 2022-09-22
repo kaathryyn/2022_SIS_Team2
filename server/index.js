@@ -9,7 +9,7 @@
 //   console.log(`Server listening on ${PORT}`);
 // });
 
-require("./firebase");
+const fb = require("./firebase");
 require('dotenv').config();
 
 const http = require('http');
@@ -61,6 +61,12 @@ app.post('/upload', upload.single("image"), async(req, res)=>{
     const path = "./" + loc + "/" + file;
     // const func = await vision.detectLandmark(path); // Commented to reduce usage
     res.send("Successful post");
+});
+
+app.post('/login', async(req, res) => {
+    // require("firebase-admin");
+    // const fs = firestore(app);
+    // console.log(fs.collection("users"));
 });
 
 
