@@ -1,4 +1,5 @@
 import "./Login.css";
+import { Link } from "react-router-dom";
 
 import logo from "../../Assets/Main-Logo.png";
 
@@ -25,8 +26,9 @@ function Login(props){
                         <input className="input-field">
                         
                         </input>
-                        <h3 className="forgot-password">Forgot Password?</h3>
                     </div>
+                        <Link to="/forgotpassword"
+                        className="forgot-password"> Forgot Password?</Link>
                     <div className="button-div">
                         <button className="login-button">Login</button>
                         <button className="register-button" onClick={() => props.history.push("/signup")}>Register</button>

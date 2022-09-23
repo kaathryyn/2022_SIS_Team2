@@ -5,6 +5,7 @@ import './App.css';
 import Login from "./Components/Login/Login.js";
 import Signup from "./Components/SignUp/Signup.js";
 import Navbar from "./Components/Navbar/sidebar.js";
+import ForgotPassword from "./Components/ForgotPassword/ForgotPassword.js";
 
 function App() {
   return (
@@ -35,6 +36,16 @@ function App() {
             <div className="App">
             
             <Signup/>
+
+            </div>
+          }
+        />
+          <Route
+          path="/forgotpassword"
+          element={
+            <div className="App">
+            
+            <ForgotPassword/>
 
             </div>
           }
