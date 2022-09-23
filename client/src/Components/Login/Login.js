@@ -1,10 +1,14 @@
 import "./Login.css";
-
+import Navbar from "../Navbar/Navbar.js"
 import logo from "../../Assets/Main-Logo.png";
+import React from 'react';
 
 function Login(props){
     console.log(props.history)
     return(
+        <React.Fragment>   
+        <Navbar>
+       </Navbar>
         <div className="login-div">
                 <img
                     alt="Main Logo"
@@ -35,6 +39,7 @@ function Login(props){
 
             </div>
         </div>
+        </React.Fragment>
     )
 }
 

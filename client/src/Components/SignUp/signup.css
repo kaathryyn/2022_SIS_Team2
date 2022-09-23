@@ -13,6 +13,7 @@ body{
     background: #1f7b1c;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, hsl(139, 76%, 25%), #129c1e);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #0a9353, #068b1f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
 }
 .main-logo{
     width: 40%;
@@ -39,7 +40,7 @@ body{
 .form__label{
     width: 40%;
 }
-form_input{
+.form_input{
     width: 60%;
 }
 .footer{

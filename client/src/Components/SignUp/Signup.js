@@ -1,10 +1,15 @@
 import React from 'react';
 import logo from "../../Assets/Main-Logo.png";
 import './signup.css'
+import Navbar from "../Navbar/Navbar.js"
 function SignUp() {
     
     return(
+        <React.Fragment>   
+                <Navbar>
+               </Navbar>
       <div className="form">
+                
         <img
                     alt="Main Logo"
                     src={logo}
@@ -38,6 +43,7 @@ function SignUp() {
           
           
       </div>      
+      </React.Fragment>
     )       
 }
 export default SignUp;
