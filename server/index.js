@@ -55,6 +55,18 @@ app.get('/', (req, res)=>{
     console.log(req.headers);
     res.send("Welcome to your server");
 });
+
+// Retrieves all user photos
+app.get('/gallery', async(req, res) => {
+    //
+});
+
+// Retrieves location data
+app.get('/landmark', async(req, res) => {
+
+});
+
+// Runs Vision AI on incoming image
 app.post('/upload', upload.single("image"), async(req, res)=>{
     const file = req.file.filename;
     const loc = req.file.destination;
@@ -63,11 +75,17 @@ app.post('/upload', upload.single("image"), async(req, res)=>{
     res.send("Successful post");
 });
 
+// Checks if user can log in
 app.post('/login', async(req, res) => {
-    // require("firebase-admin");
-    // const fs = firestore(app);
-    // console.log(fs.collection("users"));
+    //
 });
+
+// Create new user
+app.post('/signup', async(req, res) => {
+    //
+});
+
+//
 
 
 // require("./vision");
