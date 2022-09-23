@@ -14,6 +14,7 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const { default: vision } = require("./vision");
+const fb = require("../client/src/firebase");
 
 const app = express();
 const server = http.createServer(app);
@@ -42,4 +43,3 @@ app.post('/', (req, res)=>{
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 require("./vision");
-require("./firebase");
