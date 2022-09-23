@@ -1,4 +1,3 @@
-
 import React, { useRef } from "react";
 import Webcam from "react-webcam";
  
@@ -13,6 +12,11 @@ const Camera = () => {
  
   const capturePhoto = React.useCallback(async () => {
     const imageSrc = webcamRef.current.getScreenshot();
+    const response = await fetch('/upload', {
+        method:'POST',
+        headers: { 'Content-Type': 'multipart/form-data'},
+        body: JSON.stringify(imageSrc)
+    })
     setUrl(imageSrc);
   }, [webcamRef]);
  
