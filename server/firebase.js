@@ -26,7 +26,11 @@ catch(err) {
 const firestore = admin.firestore();
 
 async function getAllUsers() {
-  console.log(await firestore.collection("users").listDocuments());
+  await firestore.collection("users").get().then(query => {
+    query.forEach(document => {
+      console.log(JSON.stringify(document.data()));
+    });
+  });
 }
 
 getAllUsers();
