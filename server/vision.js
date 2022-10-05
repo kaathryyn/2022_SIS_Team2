@@ -4,7 +4,7 @@ const { ok } = require("assert");
 const GCP_CREDENTIALS = require("./GCP_CREDS.json");
 
 const CREDENTIALS = JSON.parse(
-    JSON.stringify()
+    JSON.stringify(GCP_CREDENTIALS)
 );
 
 const CONFIG = {
