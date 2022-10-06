@@ -1,5 +1,7 @@
+const { initializeApp } = require('firebase/app');
 const admin = require('firebase-admin');
 const { getDatabase, getDatabaseWithUrl } = require('firebase-admin/database');
+const fbStorage = require("firebase/storage");
 
 const SERVICE_ACCOUNT = require('../firebase_key.json');
 
@@ -12,18 +14,14 @@ const FIREBASE_CONFIG = {
   appId: "1:672994537716:web:4a7af45030ed42b1782ea1"
 };
 
-try {
-  admin.initializeApp({
-    credential: admin.credential.cert(SERVICE_ACCOUNT),
-    ...FIREBASE_CONFIG
-  });
-  console.log("Firebase app is now running...")
-}
-catch(err) {
-  console.log("Error! Firebase app cannot start :(")
-}
+const app = initializeApp(FIREBASE_CONFIG);
+admin.initializeApp({
+  credential: admin.credential.cert(SERVICE_ACCOUNT),
+  ...FIREBASE_CONFIG
+})
 
 const firestore = admin.firestore();
+const cloudStorage = fbStorage.getStorage(app);
 
 async function getAllUsers() {
   await firestore.collection("users").get().then(query => {
@@ -33,4 +31,19 @@ async function getAllUsers() {
   });
 }
 
-getAllUsers();
+async function getFilesinCloudStorage() {
+  const listRef = fbStorage.ref(cloudStorage, "Test/");
+  
+  await fbStorage.listAll(listRef)
+    .then((res) => {
+      files = res.items.forEach((listRef) => {
+        console.log(res);
+      });
+    }).catch((err => {
+      console.log("Cannot get files in cloud storage");
+    }));
+}
+
+getFilesinCloudStorage();
+
+// getAllUsers();

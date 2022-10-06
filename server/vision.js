@@ -25,9 +25,10 @@ const CONFIG = {
 };
 
 const bucketName = "gs://spr22-sis-team2.appspot.com/Test";
-const filename = "sydney-opera-house-selfie.jpg";
+const filename = "eiffel_tower_selfie.jpg";
 // var img = `${bucketName}/${filename}`;
 var img = "gs://cloud-samples-data/vision/landmark/st_basils.jpeg"
+// var img = "gs://spr22-sis-team2.appspot.com/Test/eiffel_tower_selfie.jpg";
 
 async function detectLandmark(img) {
     const client = new vision.ImageAnnotatorClient(CONFIG);
@@ -40,7 +41,7 @@ async function detectLandmark(img) {
         console.log(`Landmark identified for file ${img}:`);
         landmarks.forEach(l=>console.log(l.description));
     } 
-    else console.log(`No famous landmark detected for file ${img}`);
+    else console.log(`No famous landmark detected for photo: ${img}`);
     console.log("----------------------------------------------------------------------------------------------------");
     return true;
 }
