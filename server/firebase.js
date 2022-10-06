@@ -42,20 +42,36 @@ async function addUser(user) {
 
 async function getUser(username) {
   let user = null;
+  let id = null;
   await firestore.collection("users").get().then(query => {
     query.forEach(document => {
-      if (document.data().Email === username) { user = document.data(); return; };
+      if (document.data().Email === username) { user = document.data(); id = document.id; return; };
     });
   });
-  return user;
+  return {user, id};
 }
 
 async function checkUser(credentials) {
   let returnFlag = false;
-  const user = getUser(credentials.Email);
-  if ( credentials.Password === user.Password) {returnFlag = true};
+  const {user, id} = await getUser(credentials.Email);
+  if (credentials.Password === user.Password) {returnFlag = true};
   return returnFlag;
 }
 
+async function addToGallery(image) {
+  const res = await firestore.collection("users").doc(id).collection("Gallery").add(image);
+  console.log("Added new image with ID: ", res.id);
+}
+
+async function getGallery(id) {
+  let gallery = [];
+  await firestore.collection("users").doc(id).collection("Gallery").get().then(query => {
+    query.forEach(document => {
+      gallery.push(document);
+    })
+  });
+  return gallery;
+}
+
 // Exposure points
-module.exports = { checkUser, addUser };
+module.exports = { checkUser, addUser, getGallery };
