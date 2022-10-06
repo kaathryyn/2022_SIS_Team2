@@ -9,7 +9,6 @@
 //   console.log(`Server listening on ${PORT}`);
 // });
 
-const fb = require("./firebase");
 require('dotenv').config();
 
 const http = require('http');
@@ -17,6 +16,7 @@ const express = require('express');
 const path = require('path');
 const socketio = require('socket.io');
 const vision = require("./vision");
+const fb = require("./firebase");
 
 
 //Initialise server
@@ -77,15 +77,14 @@ app.post('/upload', upload.single("image"), async(req, res)=>{
 
 // Checks if user can log in
 app.post('/login', async(req, res) => {
-    //
+    const login = req.body;
+    const result = await fb.checkUser(login);
+    res.send(result);
 });
 
 // Create new user
 app.post('/signup', async(req, res) => {
-    //
+    const user = req.body;
+    const result = await fb.addUser(user);
+    res.send(result);
 });
-
-//
-
-
-// require("./vision");
