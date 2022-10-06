@@ -58,7 +58,9 @@ app.get('/', (req, res)=>{
 
 // Retrieves all user photos
 app.get('/gallery', async(req, res) => {
-    //
+    const docId = req.body;
+    const result = await fb.getGallery(docId);
+    res.send(result);
 });
 
 // Retrieves location data
