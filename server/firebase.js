@@ -1,5 +1,6 @@
 const admin = require('firebase-admin');
 const { getDatabase, getDatabaseWithUrl } = require('firebase-admin/database');
+const { user } = require('firebase-functions/v1/auth');
 
 const SERVICE_ACCOUNT = require('../firebase_key.json');
 
@@ -33,4 +34,28 @@ async function getAllUsers() {
   });
 }
 
-getAllUsers();
+async function addUser(user) {
+  const { email, password } = user;
+  const res = await firestore.collection("users").add(user);
+  console.log("Added new document with ID: ", res.id);
+}
+
+async function getUser(username) {
+  let user = null;
+  await firestore.collection("users").get().then(query => {
+    query.forEach(document => {
+      if (document.data().Email === username) { user = document.data(); return; };
+    });
+  });
+  return user;
+}
+
+async function checkUser(credentials) {
+  let returnFlag = false;
+  const user = getUser(credentials.Email);
+  if ( credentials.Password === user.Password) {returnFlag = true};
+  return returnFlag;
+}
+
+// Exposure points
+module.exports = { checkUser, addUser };
