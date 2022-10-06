@@ -31,19 +31,19 @@ async function getAllUsers() {
   });
 }
 
-async function getFilesinCloudStorage() {
-  const listRef = fbStorage.ref(cloudStorage, "Test/");
+async function getAllFilesinCloudStorage() {
+  const listRef = fbStorage.ref(cloudStorage, "Test");
   
   await fbStorage.listAll(listRef)
     .then((res) => {
-      files = res.items.forEach((listRef) => {
-        console.log(res);
+      res.items.forEach((imgRef) => {
+        console.log(`Full file path: ${imgRef}`);
       });
     }).catch((err => {
       console.log("Cannot get files in cloud storage");
     }));
 }
 
-getFilesinCloudStorage();
+// getAllFilesinCloudStorage();
 
 // getAllUsers();

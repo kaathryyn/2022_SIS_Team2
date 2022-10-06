@@ -41,7 +41,7 @@ async function detectLandmark(img) {
         console.log(`Landmark identified for file ${img}:`);
         landmarks.forEach(l=>console.log(l.description));
     } 
-    else console.log(`No famous landmark detected for photo: ${img}`);
+    else console.log(`No famous landmark detected for file: ${img}`);
     console.log("----------------------------------------------------------------------------------------------------");
     return true;
 }
