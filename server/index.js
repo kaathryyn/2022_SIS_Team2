@@ -37,6 +37,7 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 // Incoming file storage function
 const multer = require("multer");
+const { ppid } = require('process');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, process.env.UPLOAD_LOC);
@@ -69,12 +70,22 @@ app.get('/landmark', async(req, res) => {
 });
 
 // Runs Vision AI on incoming image
-app.post('/upload', upload.single("image"), async(req, res)=>{
+app.post('/vision', upload.single("image"), async(req, res)=>{
     const file = req.file.filename;
     const loc = req.file.destination;
     const path = "./" + loc + "/" + file;
-    // const func = await vision.detectLandmark(path); // Commented to reduce usage
-    res.send("Successful post");
+    // const result = await vision.detectLandmark(path); // Commented to reduce usage
+    res.send("Done");
+});
+
+// Add to User Gallery
+app.post('/upload', upload.single("image"), async(req, res)=>{
+    const {id, landmark} = req.body;
+    const file = req.file.filename;
+    const loc = req.file.destination;
+    const path = "./" + loc + "/" + file;
+    const upload = fb.addToGallery(id, image, result.description[0])
+    res.send("Done");
 });
 
 // Checks if user can log in
