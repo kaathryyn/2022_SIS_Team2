@@ -1,10 +1,14 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
-
+import Navbar from "../Navbar/Navbar.js"
 import logo from "../../Assets/Main-Logo.png";
+import React from 'react';
 
 function Login(){
     return(
+        <React.Fragment>   
+        <Navbar>
+       </Navbar>
         <div className="login-div">
                 <img
                     alt="Main Logo"
@@ -34,6 +38,7 @@ function Login(){
                 </form>
             </div>
         </div>
+        </React.Fragment>
     )
 }
 
