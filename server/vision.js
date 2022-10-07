@@ -32,7 +32,7 @@ async function detectLandmark(img) {
     } 
     else console.log(`No famous landmark detected for file ${img}`);
     console.log("----------------------------------------------------------------------------------------------------");
-    return true;
+    return landmarks[0];
 }
 
 // detectLandmark(img);

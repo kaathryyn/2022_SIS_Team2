@@ -35,9 +35,11 @@ async function getAllUsers() {
 }
 
 async function addUser(user) {
-  const { email, password } = user;
+  const { email, name, password } = user;
+  if (getUser(email)) return null;
   const res = await firestore.collection("users").add(user);
   console.log("Added new document with ID: ", res.id);
+  return res.id;
 }
 
 async function getUser(username) {
@@ -55,23 +57,28 @@ async function checkUser(credentials) {
   let returnFlag = false;
   const {user, id} = await getUser(credentials.Email);
   if (credentials.Password === user.Password) {returnFlag = true};
-  return returnFlag;
+  return returnFlag && id;
 }
 
-async function addToGallery(image) {
-  const res = await firestore.collection("users").doc(id).collection("Gallery").add(image);
+async function addToGallery(id, image, landmark) {
+  const imageDoc = {
+    imageContent: image,
+    landmark: landmark,
+    dateCreated: Date.now()
+  }
+  const res = await firestore.collection("users").doc(id).collection("gallery").add(imageDoc);
   console.log("Added new image with ID: ", res.id);
 }
 
 async function getGallery(id) {
   let gallery = [];
-  await firestore.collection("users").doc(id).collection("Gallery").get().then(query => {
+  await firestore.collection("users").doc(id).collection("gallery").get().then(query => {
     query.forEach(document => {
-      gallery.push(document);
+      gallery.push(document.data());
     })
   });
   return gallery;
 }
 
 // Exposure points
-module.exports = { checkUser, addUser, getGallery };
+module.exports = { checkUser, addUser, getGallery, addToGallery };
