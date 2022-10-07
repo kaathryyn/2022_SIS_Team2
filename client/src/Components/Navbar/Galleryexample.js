@@ -1,67 +1,31 @@
-import React from 'react';
-import Navbar from "./Navbar.js"
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import ListSubheader from '@mui/material/ListSubheader';
 
+import { Box } from '@mui/system';
+import Navbar from "./Navbar.js"
 
-
-export default class Home extends React.Component {
-    render() {
-        return (
-            <React.Fragment>
-              
-            <Navbar>
-               
-            </Navbar>
-            
+function Gallery() {
+  
+  return (
+   <React.Fragment>
+    <Navbar>
       
-            
-            <Paper  
-            elevation ={8}
-            variant = "outlined"
-            sx={{  
-              backgroundColor : "#ADD8E6",
-              justifyContent: "center",
-              alignItems: "center",
-              verticalAlign: "middle",
-              border: "1px solid black",
-              padding: 2 
-              
-            }}>
-              <Typography
-                // style={{ width: "70%", margin: "auto" }}
-                variant="h7"
-                color="textPrimary"
-                component="span"
-
-                
-                
-              >
-                Monument.io is a brand new way to share travel experiences with friends and family! Using Google Vision API our application can scan images taken by users and return detailed descriptions. Below are images that have been scanned by users and uploaded to our database. 
-              </Typography>
-            </Paper>  
-
-    <Box
-      sx={{
+    </Navbar>
+    <Box sx={{
         display: 'flex',
         flexWrap: 'wrap',
-        
         backgroundColor: "#ADD8E6",
-        
         '& > :not(style)': {
           m: 10,
           width: 2500,
           height: 1250,
           
         },
-      }}
-    >
-      <ImageList sx={{ 
+    }}>
+    <ImageList sx={{ 
       display: 'static',
       width: 900, 
       height: 500, 
@@ -70,16 +34,7 @@ export default class Home extends React.Component {
       },
       }}>
       <ImageListItem key="Subheader" cols={2}>
-        <ListSubheader component="div">
-          <Typography
-                // style={{ width: "70%", margin: "auto" }}
-                variant="h6"
-                color="textPrimary"
-                component="span"
-                
-              >
-                Images scanned using Monument.io
-              </Typography></ListSubheader>
+        <ListSubheader component="div">Images Scanned Using Monument.io</ListSubheader>
       </ImageListItem>
       {itemData.map((item) => (
         <ImageListItem key={item.img}>
@@ -97,79 +52,79 @@ export default class Home extends React.Component {
         </ImageListItem>
       ))}
     </ImageList>
-
-   
     </Box>
-            
-       </React.Fragment> )
-    }
+    </React.Fragment>
+  );
 }
+
 const itemData = [
   {
     img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
-    title: 'Opera House',
+    title: 'Breakfast',
     
     
     featured: true,
   },
   {
     img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-    title: 'Sydney Tower',
+    title: 'Burger',
     
   },
   {
     img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-    title: 'Monument 3',
+    title: 'Camera',
     
   },
   {
     img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-    title: 'Monument 4',
+    title: 'Coffee',
     
     
   },
   {
     img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
-    title: 'Monument 5',
+    title: 'Hats',
    
    
   },
   {
     img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
-    title: 'Monument 6',
+    title: 'Honey',
     
    
     featured: true,
   },
   {
     img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
-    title: 'Monument 7',
+    title: 'Basketball',
     
   },
   {
     img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
-    title: 'Monument 8',
+    title: 'Fern',
     
   },
   {
     img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
-    title: 'Monument 9',
+    title: 'Mushrooms',
    
   },
   {
     img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-    title: 'Monument 10',
+    title: 'Tomato basil',
     
   },
   {
     img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-    title: 'Monument 11',
+    title: 'Sea star',
     
   },
   {
     img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-    title: 'Monument 12',
+    title: 'Bike',
     
     
   },
 ];
+
+export default Gallery; 

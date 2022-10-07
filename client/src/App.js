@@ -5,8 +5,8 @@ import './App.css';
 //Importing Components
 import Login from "./Components/Login/Login.js";
 import Signup from "./Components/SignUp/Signup.js";
-import Navbar from "./Components/Navbar/Navbar.js";
-import Home from "./Components/Navbar/Homepage.js"
+import Home from "./Components/Navbar/Homepage.js";
+import Gallery from "./Components/Navbar/Galleryexample.js";
 function App() {
   return (
     
@@ -22,10 +22,10 @@ function App() {
           }  
         />
          <Route
-          path="/navbar"
+          path="/gallery"
           element={
             <div className="App">
-              <Navbar/>
+              <Gallery/>
             </div>
               
           }  
