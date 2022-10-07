@@ -22,7 +22,7 @@ const AllCameras = () => {
             audio={false}
             videoConstraints={{ deviceId: device.deviceId }}
           />
-          {device.label || `device ${key + 1}`}
+          {device.label || `Camera ${key}`}
         </div>
       ))}
     </>
