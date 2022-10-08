@@ -81,10 +81,13 @@ app.post('/vision', upload.single("image"), async(req, res)=>{
 // Add to User Gallery
 app.post('/upload', upload.single("image"), async(req, res)=>{
     const {id, landmark} = req.body;
-    const file = req.file.filename;
-    const loc = req.file.destination;
-    const path = "./" + loc + "/" + file;
-    const upload = fb.addToGallery(id, image, result.description[0])
+    const filename = req.file.filename;
+    const location = req.file.destination;
+    const path = "./" + location + "/" + filename;
+
+    const fs = require("fs");
+    const file = fs.readFileSync(path, null);
+    const upload = fb.addToGallery(id, file, landmark)
     res.send("Done");
 });
 
