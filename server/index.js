@@ -60,8 +60,11 @@ app.get('/', (req, res)=>{
 // Retrieves all user photos
 app.get('/gallery', async(req, res) => {
     const docId = req.body;
-    const result = await fb.getGallery(docId);
-    res.send(result);
+    if (docId.length === 20) {
+        const result = await fb.getGallery(docId);
+        return res.send(result);
+    }
+    res.status(400).send("Bad Request!");
 });
 
 // Retrieves location data
@@ -71,36 +74,51 @@ app.get('/landmark', async(req, res) => {
 
 // Runs Vision AI on incoming image
 app.post('/vision', upload.single("image"), async(req, res)=>{
-    const file = req.file.filename;
-    const loc = req.file.destination;
-    const path = "./" + loc + "/" + file;
-    // const result = await vision.detectLandmark(path); // Commented to reduce usage
-    res.send("Done");
+    try {
+        const file = req.file.filename;
+        const loc = req.file.destination;
+        const path = "./" + loc + "/" + file;
+        // const result = await vision.detectLandmark(path); // Commented to reduce usage
+        // res.send(result);
+        res.send("Done");
+    }
+    catch { res.status(405).send("Failed to process request."); }
 });
 
 // Add to User Gallery
 app.post('/upload', upload.single("image"), async(req, res)=>{
     const {id, landmark} = req.body;
-    const filename = req.file.filename;
-    const location = req.file.destination;
-    const path = "./" + location + "/" + filename;
-
-    const fs = require("fs");
-    const file = fs.readFileSync(path, null);
-    const upload = fb.addToGallery(id, file, landmark)
-    res.send("Done");
+    if (!(id && landmark)) { return res.status(400).send("Bad Request!"); }
+    try {
+        const filename = req.file.filename;
+        const location = req.file.destination;
+        const path = "./" + location + "/" + filename;
+    
+        const fs = require("fs");
+        const blob = fs.readFileSync(path, null);
+        const result = fb.addToGallery(id, blob, landmark) // Boolean returned
+        res.send(result);
+    }
+    catch { res.status(405).send("Failed to process request."); }
 });
 
 // Checks if user can log in
 app.post('/login', async(req, res) => {
     const login = req.body;
-    const result = await fb.checkUser(login);
-    res.send(result);
+    if (typeof user === "object") {
+        const result = await fb.checkUser(login); // User ID is returned
+        return result && res.send(result);
+    }
+    res.status(400).send("Bad Request!");
+    
 });
 
 // Create new user
 app.post('/signup', async(req, res) => {
     const user = req.body;
-    const result = await fb.addUser(user);
-    res.send(result);
+    if (typeof user === "object") {
+        const result = await fb.addUser(user); // User ID is returned
+        return res.send(result);
+    }
+    res.status(400).send("Bad Request!");
 });
