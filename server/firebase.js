@@ -26,20 +26,21 @@ catch(err) {
 
 const firestore = admin.firestore();
 
+function checkId(id) {
+  const regEx = /^[a-z0-9]+$/i;
+  return regEx.exec(id);
+}
+
+function encodeData(data) {
+  return Buffer.from(data).toString("utf16le");
+}
+
 async function getAllUsers() {
   await firestore.collection("users").get().then(query => {
     query.forEach(document => {
       console.log(JSON.stringify(document.data()));
     });
   });
-}
-
-async function addUser(user) {
-  const { email, name, password } = user;
-  if (getUser(email)) return null;
-  const res = await firestore.collection("users").add(user);
-  console.log("Added new document with ID: ", res.id);
-  return res.id;
 }
 
 async function getUser(username) {
@@ -53,25 +54,44 @@ async function getUser(username) {
   return {user, id};
 }
 
+async function addUser(user) {
+  const { email, name, password } = user;
+  if (!(email && name && password)) return null;
+  if (getUser(email)) return null;
+
+  user.password = encodeData(password);
+  const res = await firestore.collection("users").add(user);
+  console.log("Added new document with ID: ", res?.id);
+  return res?.id;
+}
+
 async function checkUser(credentials) {
   let returnFlag = false;
+  const { email, password } = credentials;
+  if (!(email && password)) return null;
+
   const {user, id} = await getUser(credentials.Email);
-  if (credentials.Password === user.Password) {returnFlag = true};
+  if (credentials.Password === encodeData(user.Password)) { returnFlag = true };
   return returnFlag && id;
 }
 
 async function addToGallery(id, image, landmark) {
-  const imageDoc = {
-    imageContent: image,
-    landmark: landmark,
-    dateCreated: Date.now()
+  try {
+    const imageDoc = {
+      imageContent: image,
+      landmark: landmark,
+      dateCreated: Date.now(),
+    }
+    const res = await firestore.collection("users").doc(id).collection("gallery").add(imageDoc);
+    console.log("Added new image with ID: ", res.id);
+    return true;
   }
-  const res = await firestore.collection("users").doc(id).collection("gallery").add(imageDoc);
-  console.log("Added new image with ID: ", res.id);
+  catch { return false; }
 }
 
 async function getGallery(id) {
   let gallery = [];
+  if (!checkId(id)) return null;
   await firestore.collection("users").doc(id).collection("gallery").get().then(query => {
     query.forEach(document => {
       gallery.push(document.data());
