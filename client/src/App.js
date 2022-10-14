@@ -8,6 +8,8 @@ import Signup from "./Components/SignUp/Signup.js";
 import Home from "./Components/Navbar/Homepage.js";
 import Gallery from "./Components/Navbar/Galleryexample.js";
 import ForgotPassword from "./Components/ForgotPassword/ForgotPassword.js";
+import Camera from "./Components/Upload/camera.js";
+import AllCameras from "./Components/Upload/AllCameras.js";
 function App() {
   return (
     
@@ -27,6 +29,16 @@ function App() {
           element={
             <div className="App">
               <Gallery/>
+            </div>
+              
+          }  
+        />
+        <Route
+          path="/camera"
+          element={
+            <div className="App">
+              <Camera/>
+              <AllCameras/>
             </div>
               
           }  
