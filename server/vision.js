@@ -37,8 +37,7 @@ async function detectLandmark(img) {
 
         // Add Coords of Bounding Box to array - top_left > top_right > bottom_right > bottom_left
         for (let i = 0; i < 4; i++) {
-            landmarkInfo.push(landmarkVertices[i].x);
-            landmarkInfo.push(landmarkVertices[i].y);
+            landmarkInfo.push(Object.values(landmarkVertices[i]));
         }
     } else {
         console.log(`No famous landmark detected for file ${img}`);
