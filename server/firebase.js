@@ -1,5 +1,4 @@
-const admin = require('firebase-admin');
-const { getDatabase, getDatabaseWithUrl } = require('firebase-admin/database');
+const { initializeApp, applicationDefault } = require('firebase-admin/app');
 
 const SERVICE_ACCOUNT = require('../firebase_key.json');
 
@@ -13,20 +12,13 @@ const FIREBASE_CONFIG = {
 };
 
 try {
-  admin.initializeApp({
-    credential: admin.credential.cert(SERVICE_ACCOUNT),
-    ...FIREBASE_CONFIG
+  initializeApp({
+    credential: applicationDefault(),
+    projectId: FIREBASE_CONFIG.projectId,
+    storageBucket: FIREBASE_CONFIG.storageBucket
   });
   console.log("Firebase app is now running...")
 }
 catch(err) {
   console.log("Error! Firebase app cannot start :(")
 }
-
-const firestore = admin.firestore();
-
-async function getAllUsers() {
-  console.log(await firestore.collection("users").listDocuments());
-}
-
-getAllUsers();
