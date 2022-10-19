@@ -26,9 +26,9 @@ function Gallery() {
         },
     }}>
     <ImageList sx={{ 
-      display: 'static',
-      width: 900, 
-      height: 500, 
+      display: 'block',
+      maxWidth: 9000, 
+      maxHeight: 500, 
       '&::-webkit-scrollbar': { 
       width: 0,
       },

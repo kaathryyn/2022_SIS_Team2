@@ -1,16 +1,13 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
-import Navbar from "../Navbar/Navbar.js"
-import logo from "../../Assets/Main-Logo.png";
 import React from 'react';
-
+import logo from "../../Assets/Main-Logo.png";
 function Login(){
     return(
         <React.Fragment>   
-        <Navbar>
-       </Navbar>
+        
         <div className="login-div">
-                <img
+        <img
                     alt="Main Logo"
                     src={logo}
                     className="main-logo"
@@ -25,12 +22,14 @@ function Login(){
                     <div className="password-div">
                         <h3 className="password-label">Password</h3>
                         <input className="input-field"></input>
-                        <h3 className="forgot-password">Forgot Password?</h3>
+                        
                     </div>
                         <Link to="/forgotpassword"
                         className="forgot-password"> Forgot Password?</Link>
                     <div className="button-div">
+                    <Link to="/home">
                         <button className="login-button">Login</button>
+                        </Link>
                         <Link to="/Signup">
                             <button className="register-button">Register</button>
                         </Link>    

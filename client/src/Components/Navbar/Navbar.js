@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../../Assets/Main-Logo.png";
 import {
   AppBar,
   Toolbar,
@@ -33,7 +34,11 @@ function Navbar() {
       <CssBaseline />
       <Toolbar>
         <Typography variant="h4" className={classes.logo}>
-          Monument.io
+        <img
+                    alt="Main Logo"
+                    src={logo}
+                    className="main-logo"
+                ></img>
         </Typography>
         {isMobile ? (
           <DrawerComponent />
@@ -47,9 +52,6 @@ function Navbar() {
             </Link>
             <Link to="/signup" className={classes.link}>
               Signup
-            </Link>
-            <Link to="/faq" className={classes.link}>
-              FAQ
             </Link>
           </div>
         )}

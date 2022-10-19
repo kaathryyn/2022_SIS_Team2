@@ -16,11 +16,12 @@ import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles(() => ({
-  link: { textDecoration: "none", color: "blue", fontSize: "20px" },
+  link: { textDecoration: "none", color: "#688c40", fontSize: "20px" },
   icon: { color: "white" },
   logo: { flexGrow: "1", cursor: "pointer" },
-  draw: { background: "red" }
+ 
 }));
+
 
 function DrawerComponent() {
   const classes = useStyles();
@@ -30,18 +31,19 @@ function DrawerComponent() {
     <>
       <Drawer
         anchor="left"
-        sx={{ width: 250, color: "#fff" }}
+        sx={{ width: 250, color: "#688c40" }}
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
+        drawerBackgroundColor = "black"
       >
-        <Toolbar sx={{ backgroundColor: "primary.main" }}>
+        <Toolbar sx={{ bgColor: "#green" }}>
           <Typography variant="h4" className={classes.logo}>
             Monument.io 
           </Typography>
           <CloseIcon 
            onClick={() => setOpenDrawer(!openDrawer)}/>
         </Toolbar>
-        <Box sx={{ backgroundColor: "primary.main" }} height="1000vh">
+        <Box sx={{ backgroundColor: "#688c40" }} height="1000vh">
           <List height="100vh">
             <Divider />
             <ListItem onClick={() => setOpenDrawer(false)}>
@@ -71,7 +73,7 @@ function DrawerComponent() {
             <ListItem>
               <ListItemText>
                 <Link to="/" className={classes.link}>
-                  FAQ
+                  Gallery
                 </Link>
               </ListItemText>
             </ListItem>

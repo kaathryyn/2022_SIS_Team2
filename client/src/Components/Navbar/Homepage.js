@@ -1,78 +1,69 @@
 import React from 'react';
 import Navbar from "./Navbar.js"
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import ListSubheader from '@mui/material/ListSubheader';
+import { Button } from '@mui/material';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import { Link } from "react-router-dom"; 
+
+import Grid from '@mui/material/Grid';
+import "./homepage.css"
 
 
-
-export default class Home extends React.Component {
-    render() {
+function Home() {
+  
         return (
-            <React.Fragment>
+          
+    <React.Fragment>
               
-            <Navbar>
-               
-            </Navbar>
+    <Navbar/>   
             
+    <div className = "outerdiv">
+
+    <Grid sx = {{
+      backgroundColor: "green",
+      alignItems: "flex-end"
+    }}>
       
-            
-            <Paper  
-            elevation ={8}
-            variant = "outlined"
-            sx={{  
-              backgroundColor : "#ADD8E6",
-              justifyContent: "center",
-              alignItems: "center",
-              verticalAlign: "middle",
-              border: "1px solid black",
-              padding: 2 
-              
-            }}>
-              <Typography
-                // style={{ width: "70%", margin: "auto" }}
-                variant="h7"
-                color="textPrimary"
-                component="span"
+   
+    </Grid>    
 
-                
-                
-              >
-                Monument.io is a brand new way to share travel experiences with friends and family! Using Google Vision API our application can scan images taken by users and return detailed descriptions. Below are images that have been scanned by users and uploaded to our database. 
-              </Typography>
-            </Paper>  
-
+    
+    
     <Box
       sx={{
         display: 'flex',
         flexWrap: 'wrap',
-        
-        backgroundColor: "#ADD8E6",
+        borderColor: 'error.main',
         
         '& > :not(style)': {
-          m: 10,
-          width: 2500,
-          height: 1250,
+          m: 1,
+          width: 900,
+          height: 600,
           
         },
       }}
     >
+  
+      
+     
+    
       <ImageList sx={{ 
       display: 'static',
-      width: 900, 
-      height: 500, 
+      
       '&::-webkit-scrollbar': { 
       width: 0,
       },
       }}>
+      
       <ImageListItem key="Subheader" cols={2}>
-        <ListSubheader component="div">
+        <ListSubheader component="div" backgroundColor = "blue">
           <Typography
-                // style={{ width: "70%", margin: "auto" }}
+                
                 variant="h6"
                 color="textPrimary"
                 component="span"
@@ -95,15 +86,27 @@ export default class Home extends React.Component {
            
           />
         </ImageListItem>
+        
       ))}
     </ImageList>
+    <Button style={{maxWidth: '155px', maxHeight: '50px', minWidth: '155px', minHeight: '50px', backgroundColor: "#688C40",}}  component={Link} to="/camera" variant="contained" endIcon={<PhotoCamera />} >
+        Vision API
+        
+       
+      </Button>
 
-   
     </Box>
+
+
+    </div>
+      
+    
             
        </React.Fragment> )
     }
-}
+
+    export default Home; 
+
 const itemData = [
   {
     img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
@@ -151,25 +154,5 @@ const itemData = [
     title: 'Monument 8',
     
   },
-  {
-    img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
-    title: 'Monument 9',
-   
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-    title: 'Monument 10',
-    
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-    title: 'Monument 11',
-    
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-    title: 'Monument 12',
-    
-    
-  },
+
 ];
