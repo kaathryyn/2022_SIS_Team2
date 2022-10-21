@@ -1,4 +1,4 @@
-/* import { GoogleLogout } from 'react-google-login';
+import { GoogleLogout } from 'react-google-login';
 
 function Login() {
 
@@ -26,4 +26,4 @@ function Login() {
     )
 }
 
-export default Logout; /*
+export default Logout; 

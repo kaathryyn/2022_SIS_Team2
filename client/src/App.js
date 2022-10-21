@@ -1,7 +1,6 @@
 import React from "react";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import './App.css';
-import Gallery from "./Components/Navbar/Galleryexample.js";
 import Login from "./Components/Login/Login.js";
 import Signup from "./Components/SignUp/Signup.js";
 import ForgotPassword from "./Components/ForgotPassword/ForgotPassword.js";
@@ -15,7 +14,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/gallery" element={<Gallery />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/camera" element={<Camera />} />

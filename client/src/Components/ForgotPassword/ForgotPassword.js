@@ -1,5 +1,5 @@
 import "./ForgotPassword.css";
-
+import { Link } from "react-router-dom";
 import logo from "../../Assets/Main-Logo.png";
 
 function ForgotPassword(){
@@ -25,7 +25,15 @@ function ForgotPassword(){
                         <h3 className="confirm-password-label"> Confirm Password</h3>
                         <input className="forgot-input-field"></input>
                     </div>
-                    <button className="reset-button">Reset</button>
+                    <div className="button-div">
+                        
+                            <button className="login-button">Reset</button>
+                       
+                        
+                        <Link to="/Signup">
+                            <button className="register-button">Back to Login</button>
+                        </Link>  
+                    </div>  
                 </form>
             </div>
         </div>

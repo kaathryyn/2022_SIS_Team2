@@ -7,13 +7,14 @@ import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import Navbar from "../Navbar/Navbar";
+import { Stack } from "@mui/system";
 
 const videoConstraints = {
   height: 500,
   width: 400,
   facingMode: "environment",
   position: 'relative',
-  transform: 'rotateY(180deg) translateX(50%)',
+  
   
 };
  
@@ -35,9 +36,9 @@ const Camera = () => {
     console.log(e);
   };
  
-  
   return (
-    <div className="login-div">
+    <div className="login-div"
+    >
       <Navbar/>
     <Grid
     container spacing={42}
@@ -59,12 +60,14 @@ const Camera = () => {
       
         
       />
-     
-    <Button style={{maxWidth: '155px', maxHeight: '50px', minWidth: '155px', minHeight: '50px', backgroundColor: "#688C40", borderRadius: 35, marginRight: 25, }} variant="contained" onClick={capturePhoto}>Capture{<CameraAltOutlinedIcon/>}</Button>
+     <Stack direction = "" alignItems = "flex-end" justifyContent={"flex-start"}>  
+      <Button style={{maxWidth: '155px', maxHeight: '50px', minWidth: '155px', minHeight: '50px', backgroundColor: "#688C40", borderRadius: 35, }} variant="contained" onClick={capturePhoto}>Capture{<CameraAltOutlinedIcon/>}</Button>
       <Button style={{maxWidth: '155px', maxHeight: '50px', minWidth: '155px', minHeight: '50px', backgroundColor: "#688C40", borderRadius: 35}} variant="contained" onClick={() => setUrl(null)}>Refresh {<RefreshRoundedIcon />}</Button>
-      <Button style={{maxWidth: '155px', maxHeight: '50px', minWidth: '155px', minHeight: '50px', backgroundColor: "#688C40" , borderRadius: 35, marginLeft: 25, }} variant="contained" component="label" endIcon={<FileUploadIcon />}>Upload
+      <Button style={{maxWidth: '155px', maxHeight: '50px', minWidth: '155px', minHeight: '50px', backgroundColor: "#688C40" , borderRadius: 35, }} variant="contained" component="label" endIcon={<FileUploadIcon />}>Upload
         <input hidden accept="image/*" multiple type="file" />
-      </Button>
+      </Button> 
+      </Stack>
+     
       
       
       {url && (
