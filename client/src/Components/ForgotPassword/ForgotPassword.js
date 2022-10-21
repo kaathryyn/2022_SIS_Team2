@@ -30,7 +30,7 @@ function ForgotPassword(){
                             <button className="login-button">Reset</button>
                        
                         
-                        <Link to="/Signup">
+                        <Link to="/login">
                             <button className="register-button">Back to Login</button>
                         </Link>  
                     </div>  
