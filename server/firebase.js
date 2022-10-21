@@ -59,7 +59,7 @@ async function addUser(user) {
   if (!(email && name && password)) return null;
   if (getUser(email)) return null;
 
-  user.password = encodeData(password);
+  // user.password = encodeData(password);
   const res = await firestore.collection("users").add(user);
   console.log("Added new document with ID: ", res?.id);
   return res?.id;
@@ -71,7 +71,8 @@ async function checkUser(credentials) {
   if (!(email && password)) return null;
 
   const {user, id} = await getUser(credentials.Email);
-  if (credentials.Password === encodeData(user.Password)) { returnFlag = true };
+  // console.log(encodeData(user.Password));
+  if (credentials.Password === user.Password) { returnFlag = true };
   return returnFlag && id;
 }
 

@@ -14,10 +14,10 @@ require('dotenv').config();
 const http = require('http');
 const express = require('express');
 const path = require('path');
+const cors = require("cors");
 const socketio = require('socket.io');
 const vision = require("./vision");
 const fb = require("./firebase");
-
 
 //Initialise server
 const app = express();
@@ -25,6 +25,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 // Set static folder
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Run when client connects
@@ -105,7 +106,7 @@ app.post('/upload', upload.single("image"), async(req, res)=>{
 // Checks if user can log in
 app.post('/login', async(req, res) => {
     const login = req.body;
-    if (typeof user === "object") {
+    if (typeof login === "object") {
         const result = await fb.checkUser(login); // User ID is returned
         return result && res.send(result);
     }

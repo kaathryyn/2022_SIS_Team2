@@ -16,61 +16,46 @@ import "./homepage.css"
 
 function Home() {
   
-        return (
-          
+  return (
     <React.Fragment>
-              
-    <Navbar/>   
-            
-    <div className = "outerdiv">
-
-    <Grid sx = {{
-      backgroundColor: "green",
-      alignItems: "flex-end"
-    }}>
-      
-   
-    </Grid>    
-
-    
-    
-    <Box
-      sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        borderColor: 'error.main',
-        
-        '& > :not(style)': {
-          m: 1,
-          width: 900,
-          height: 600,
-          
-        },
-      }}
-    >
-  
-      
-     
-    
-      <ImageList sx={{ 
-      display: 'static',
-      
-      '&::-webkit-scrollbar': { 
-      width: 0,
-      },
+      <Navbar/>
+      <div className = "outerdiv">
+      <Grid sx = {{
+        backgroundColor: "green",
+        alignItems: "flex-end"
       }}>
-      
+      </Grid>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          borderColor: 'error.main',
+          
+          '& > :not(style)': {
+            m: 1,
+            width: 900,
+            height: 600,
+          },
+        }}
+      >
+
+      <ImageList sx={{ 
+        display: 'static',
+        
+        '&::-webkit-scrollbar': { 
+        width: 0,
+        },
+      }}>
       <ImageListItem key="Subheader" cols={2}>
         <ListSubheader component="div" backgroundColor = "blue">
           <Typography
-                
-                variant="h6"
-                color="textPrimary"
-                component="span"
-                
-              >
-                Images scanned using Monument.io
-              </Typography></ListSubheader>
+            variant="h6"
+            color="textPrimary"
+            component="span"
+          >
+            Images scanned using Monument.io
+          </Typography>
+        </ListSubheader>
       </ImageListItem>
       {itemData.map((item) => (
         <ImageListItem key={item.img}>
@@ -80,32 +65,19 @@ function Home() {
             alt={item.title}
             loading="lazy"
           />
-          <ImageListItemBar
-            title={item.title}
-           
-           
-          />
+          <ImageListItemBar title={item.title} />
         </ImageListItem>
-        
       ))}
     </ImageList>
     <Button style={{maxWidth: '155px', maxHeight: '50px', minWidth: '155px', minHeight: '50px', backgroundColor: "#688C40",}}  component={Link} to="/camera" variant="contained" endIcon={<PhotoCamera />} >
-        Vision API
-        
-       
-      </Button>
-
+      Vision API
+    </Button>
     </Box>
+    </div>  
+  </React.Fragment> )
+}
 
-
-    </div>
-      
-    
-            
-       </React.Fragment> )
-    }
-
-    export default Home; 
+export default Home; 
 
 const itemData = [
   {

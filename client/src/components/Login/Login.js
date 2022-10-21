@@ -1,35 +1,64 @@
 import "./Login.css";
-import { Link } from "react-router-dom";
-import React from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import axios from "axios";
+import { TextField } from "@mui/material";
 import logo from "../../Assets/Main-Logo.png";
-function Login(){
+
+export default function Login(){
+    let history = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const onFinish = (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:3001/login", {
+            ...{
+                email: email,
+                password: password
+            }
+        }).then((res) => {
+            history("/home");
+        })
+        .catch((err) => {
+            console.log(err)
+            alert("Unable to login");
+        });
+    };
+
     return(
-        <React.Fragment>   
-        
         <div className="login-div">
-        <img
-                    alt="Main Logo"
-                    src={logo}
-                    className="main-logo"
-                ></img>
+            <img
+                alt="Main Logo"
+                src={logo}
+                className="main-logo"
+            ></img>
             <div className="login-card">
                 <form className="login-form">
                     <h1 className="form-header"> Login</h1>
                     <div className="username-div">
-                        <h3 className="username-label">Username</h3>
-                        <input className="input-field"></input>
+                        {/* <h3 className="username-label">Username</h3> */}
+                        <TextField
+                            label="Email"
+                            variant="standard"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                     </div>
                     <div className="password-div">
-                        <h3 className="password-label">Password</h3>
-                        <input className="input-field"></input>
-                        
+                        <TextField
+                            label="Password"
+                            variant="standard"
+                            type={"password"}
+                            required
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
                     </div>
                         <Link to="/forgotpassword"
                         className="forgot-password"> Forgot Password?</Link>
                     <div className="button-div">
-                    <Link to="/home">
-                        <button className="login-button">Login</button>
-                        </Link>
+                        <button type="submit" onClick={onFinish}>Login</button>
                         <Link to="/Signup">
                             <button className="register-button">Register</button>
                         </Link>    
@@ -37,8 +66,5 @@ function Login(){
                 </form>
             </div>
         </div>
-        </React.Fragment>
     )
 }
-
-export default Login;

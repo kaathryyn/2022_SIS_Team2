@@ -8,8 +8,6 @@ import ForgotPassword from "./Components/ForgotPassword/ForgotPassword.js";
 import Sandbox from "./Components/Sandbox";
 import Camera from "./Components/Upload/camera.js";
 
-
-
 function App() {
   return (
     <BrowserRouter>
