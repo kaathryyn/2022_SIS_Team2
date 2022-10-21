@@ -17,6 +17,7 @@ export default function Login(){
                 password: password
             }
         }).then((res) => {
+            localStorage.setItem("user", res.data);
             history("/home");
         })
         .catch((err) => {
@@ -35,27 +36,22 @@ export default function Login(){
             <div className="login-card">
                 <form className="login-form">
                     <h1 className="form-header"> Login</h1>
-                    <div className="username-div">
-                        {/* <h3 className="username-label">Username</h3> */}
-                        <TextField
-                            label="Email"
-                            variant="standard"
-                            required
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </div>
-                    <div className="password-div">
-                        <TextField
-                            label="Password"
-                            variant="standard"
-                            type={"password"}
-                            required
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
-                        <Link to="/forgotpassword"
+                    <TextField
+                        label="Email"
+                        variant="standard"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <TextField
+                        label="Password"
+                        variant="standard"
+                        type={"password"}
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Link to="/forgotpassword"
                         className="forgot-password"> Forgot Password?</Link>
                     <div className="button-div">
                         <button type="submit" onClick={onFinish}>Login</button>
