@@ -13,12 +13,12 @@ import { Link } from "react-router-dom";
 import DrawerComponent from "./Drawer.js";
 
 const useStyles = makeStyles((theme) => ({
-  navlinks: { marginLeft: theme.spacing(10), display: "flex" },
-  logo: { flexGrow: "1", cursor: "pointer", display: "Flex" },
+  navlinks: { marginLeft: theme.spacing(135), display: "flex", },
+  logo: { flexGrow: "0.01", cursor: "pointer", display: "static",},
   link: {
     textDecoration: "none",
     color: "white",
-    fontSize: "20px",
+    fontSize: "25px",
     marginLeft: theme.spacing(2),
     "&:hover": { color: "yellow", borderBottom: "1px solid yellow" }
   }
@@ -34,11 +34,13 @@ function Navbar() {
       <CssBaseline />
       <Toolbar>
         <Typography variant="h4" className={classes.logo}>
-        <img
+        <a href="/home">  
+                <img
                     alt="Main Logo"
                     src={logo}
                     className="main-logo"
                 ></img>
+                </a>
         </Typography>
         {isMobile ? (
           <DrawerComponent />
@@ -52,6 +54,9 @@ function Navbar() {
             </Link>
             <Link to="/signup" className={classes.link}>
               Signup
+            </Link>
+            <Link to="/gallery" className={classes.link}>
+              Gallery
             </Link>
           </div>
         )}

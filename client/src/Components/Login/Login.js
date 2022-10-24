@@ -28,11 +28,13 @@ export default function Login(){
 
     return(
         <div className="login-div">
+              <a href="/home">  
             <img
                 alt="Main Logo"
                 src={logo}
-                className="main-logo"
+                className="main-logo"    
             ></img>
+            </a>
             <div className="login-card">
                 <form className="login-form">
                     <h1 className="form-header"> Login</h1>

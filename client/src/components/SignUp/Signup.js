@@ -6,11 +6,13 @@ function SignUp() {
     
     return(
       <div className="register-div">
+         <a href="/home">  
         <img
                     alt="Main Logo"
                     src={logo}
                     className="main-logo"
                 ></img>
+                </a>
         <div className="register-card">
             <form className="register-form">
                 <h1 className="register-header">Register</h1>

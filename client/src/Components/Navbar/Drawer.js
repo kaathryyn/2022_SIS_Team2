@@ -81,11 +81,12 @@ function DrawerComponent() {
           </List>
         </Box>
       </Drawer>
-      <IconButton
+      <IconButton 
+        edge="start"
         className={classes.icon}
         onClick={() => setOpenDrawer(!openDrawer)}
       >
-        <MenuIcon />
+        <MenuIcon/>
       </IconButton>
     </>
   );

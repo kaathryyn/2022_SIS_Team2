@@ -17,6 +17,8 @@
     "react": "^18.2.0",
     "react-burger-menu": "^3.0.8",
     "react-dom": "^18.2.0",
+    "react-images": "^1.2.0-beta.7",
+    "react-photo-gallery": "^8.0.0",
     "react-router-dom": "^6.4.0",
     "react-scripts": "^5.0.1",
     "react-webcam": "^7.0.1",

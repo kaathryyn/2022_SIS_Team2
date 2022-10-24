@@ -38,7 +38,9 @@ function Home() {
           },
         }}
       >
-
+      <Button style={{maxWidth: '155px', maxHeight: '50px', minWidth: '155px', minHeight: '50px', backgroundColor: "#688C40",}}  component={Link} to="/camera" variant="contained" endIcon={<PhotoCamera />} >
+      Vision API
+      </Button>
       <ImageList sx={{ 
         display: 'static',
         
@@ -52,6 +54,7 @@ function Home() {
             variant="h6"
             color="textPrimary"
             component="span"
+            backgroundColor="transparent"
           >
             Images scanned using Monument.io
           </Typography>
@@ -64,14 +67,13 @@ function Home() {
             srcSet={`${item.img}?w=248&fit=contain&auto=format&dpr=2 2x`}
             alt={item.title}
             loading="lazy"
+            onClick
           />
           <ImageListItemBar title={item.title} />
         </ImageListItem>
       ))}
     </ImageList>
-    <Button style={{maxWidth: '155px', maxHeight: '50px', minWidth: '155px', minHeight: '50px', backgroundColor: "#688C40",}}  component={Link} to="/camera" variant="contained" endIcon={<PhotoCamera />} >
-      Vision API
-    </Button>
+    
     </Box>
     </div>  
   </React.Fragment> )
