@@ -5,7 +5,7 @@ import { photos } from "./photos";
 import { Box } from "@mui/system";
 import Navbar from "../Navbar/Navbar";
 import "./gallery.css"
-import { green } from "@mui/material/colors";
+
 
 
 function PhotoGallery() {
@@ -35,8 +35,8 @@ function PhotoGallery() {
       '& > :not(style)': {
         m: 10,
         width: 950,
-        height: 300,
-        backgroundColor: green,
+        height: 715,
+        backgroundColor: "burlywood",
         
       },
   }}>

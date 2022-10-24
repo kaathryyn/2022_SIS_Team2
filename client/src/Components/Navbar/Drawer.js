@@ -1,95 +1,59 @@
-import React, { useState } from "react";
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  IconButton,
-  Divider,
-  Toolbar,
-  Typography,
-  makeStyles,
-  Box
-} from "@material-ui/core";
+import * as React from 'react';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import {IconButton} from "@material-ui/core";
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
-import CloseIcon from "@material-ui/icons/Close";
 
-const useStyles = makeStyles(() => ({
-  link: { textDecoration: "none", color: "#688c40", fontSize: "20px" },
-  icon: { color: "white" },
-  logo: { flexGrow: "1", cursor: "pointer" },
- 
-}));
-
-
-function DrawerComponent() {
-  const classes = useStyles();
-  const [openDrawer, setOpenDrawer] = useState(false);
+export default function DrawerComponent() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <>
-      <Drawer
-        anchor="left"
-        sx={{ width: 250, color: "#688c40" }}
-        open={openDrawer}
-        onClose={() => setOpenDrawer(false)}
-        drawerBackgroundColor = "black"
+    <div>
+     
+
+                <IconButton sx={{  }}
+                size="large"
+                aria-label="account of current user"
+                aria-controls={open ? 'demo-positioned-menu' : undefined}
+		            aria-expanded={open ? 'true' : undefined}
+                aria-haspopup="true"
+                onClick={handleClick}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+      <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
       >
-        <Toolbar sx={{ bgColor: "#green" }}>
-          <Typography variant="h4" className={classes.logo}>
-            Monument.io 
-          </Typography>
-          <CloseIcon 
-           onClick={() => setOpenDrawer(!openDrawer)}/>
-        </Toolbar>
-        <Box sx={{ backgroundColor: "#688c40" }} height="1000vh">
-          <List height="100vh">
-            <Divider />
-            <ListItem onClick={() => setOpenDrawer(false)}>
-              <ListItemText>
-                <Link to="/home" className={classes.link}>
-                  Home
-                </Link>
-              </ListItemText>
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText>
-                <Link to="/login" className={classes.link}>
-                  Login
-                </Link>
-              </ListItemText>
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText>
-                <Link to="/signup" className={classes.link}>
-                  Signup
-                </Link>
-              </ListItemText>
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText>
-                <Link to="/" className={classes.link}>
-                  Gallery
-                </Link>
-              </ListItemText>
-            </ListItem>
-            <Divider />
-          </List>
-        </Box>
-      </Drawer>
-      <IconButton 
-        edge="start"
-        className={classes.icon}
-        onClick={() => setOpenDrawer(!openDrawer)}
-      >
-        <MenuIcon/>
-      </IconButton>
-    </>
+            <MenuItem divider = "true" dense = "true" component={Link} to="/home"> Home</MenuItem>
+
+            <MenuItem divider = "true" dense = "true" component={Link} to="/login" onClick={handleClose}> Login</MenuItem>
+
+            <MenuItem divider = "true" dense = "true" component={Link} to="/signup"> Signup</MenuItem>
+
+            <MenuItem dense = "true" component={Link} to="/gallery" onClick={handleClose}>Gallery </MenuItem>
+      </Menu>
+    </div>
   );
 }
 
-export default DrawerComponent;

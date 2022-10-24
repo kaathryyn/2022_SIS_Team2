@@ -14,7 +14,7 @@ import DrawerComponent from "./Drawer.js";
 
 const useStyles = makeStyles((theme) => ({
   navlinks: { marginLeft: theme.spacing(135), display: "flex", },
-  logo: { flexGrow: "0.01", cursor: "pointer", display: "static",},
+  logo: { flexGrow: "1", cursor: "pointer", display: "static",},
   link: {
     textDecoration: "none",
     color: "white",
@@ -33,7 +33,7 @@ function Navbar() {
     <AppBar position="static">
       <CssBaseline />
       <Toolbar>
-        <Typography variant="h4" className={classes.logo}>
+        <Typography variant="h4" className={classes.logo} >
         <a href="/home">  
                 <img
                     alt="Main Logo"

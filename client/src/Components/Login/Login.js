@@ -5,6 +5,7 @@ import axios from "axios";
 import { TextField } from "@mui/material";
 import logo from "../../Assets/Main-Logo.png";
 
+
 export default function Login(){
     let history = useNavigate();
     const [email, setEmail] = useState("");
@@ -28,6 +29,7 @@ export default function Login(){
 
     return(
         <div className="login-div">
+            
               <a href="/home">  
             <img
                 alt="Main Logo"
@@ -56,7 +58,7 @@ export default function Login(){
                     <Link to="/forgotpassword"
                         className="forgot-password"> Forgot Password?</Link>
                     <div className="button-div">
-                        <button type="submit" onClick={onFinish}>Login</button>
+                        <button className="login-button" type="submit" onClick={onFinish}>Login</button>
                         <Link to="/Signup">
                             <button className="register-button">Register</button>
                         </Link>    

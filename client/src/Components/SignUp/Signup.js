@@ -15,7 +15,7 @@ function SignUp() {
                 </a>
         <div className="register-card">
             <form className="register-form">
-                <h1 className="register-header">Register</h1>
+                <h1 className="register-header">Signup</h1>
                 <div className="first-name-div">
                     <h3 className="first-name-label">First Name</h3>
                     <input className="register-input-field"></input>

@@ -97,9 +97,14 @@
     border: none;
     border-radius: 5px;
     color: black;
-    width: 20%;
+    min-width: 20%;
     height: 3.5em;
     margin-top: 5%;
     font-size: 1em;
     font-weight: 200;
+}
+
+.signup-button:hover{
+    background-color: #4CAF50;
+    cursor:pointer
 }

@@ -80,7 +80,7 @@
     border: none;
     border-radius: 5px;
     color: black;
-    width: 20%;
+    min-width: 20%;
     height: 3.5em;
     font-size: 1em;
     font-weight: 200;
@@ -92,9 +92,19 @@
     border: none;
     border-radius: 5px;
     color: black;
-    width: 20%;
+    min-width: 20%;
     height: 3.5em;
     margin-left: 5%;
     font-size: 1em;
     font-weight: 200;
+}
+
+.login-button:hover {
+    background-color: #4CAF50;
+    cursor:pointer
+}
+
+.register-button:hover {
+    background-color: #4CAF50;
+    cursor:pointer
 }

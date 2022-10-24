@@ -12,6 +12,9 @@
 
     margin-left: 5%;
     margin-bottom: -4%;
+    font-weight: 350;
+    font-size: 45px;
+    color: black;
 }
 
 @media only screen and (min-height: 600px) {
