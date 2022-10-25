@@ -1,4 +1,3 @@
-const { LocalConvenienceStoreOutlined } = require('@material-ui/icons');
 const fetch = require('node-fetch');
 
 async function getLandmarkWikiURL() {
