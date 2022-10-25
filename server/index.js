@@ -18,6 +18,7 @@ const cors = require("cors");
 const socketio = require('socket.io');
 const vision = require("./vision");
 const fb = require("./firebase");
+const wiki = require("./wikiAPI");
 
 //Initialise server
 const app = express();
