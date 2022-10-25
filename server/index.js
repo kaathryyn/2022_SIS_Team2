@@ -70,13 +70,8 @@ app.get('/gallery', async(req, res) => {
 });
 
 // Retrieves location data
-app.get('/landmarkWiki', async(req, res) => {
-    try {
-        const result = wiki.getLandmarkWiki();
-        res.send(result);
-        res.send("Done");
-    }
-    catch { res.status(405).send("Failed to process request.");  }
+app.get('/landmark', async(req, res) => {
+    
 });
 
 // Runs Vision AI on incoming image
