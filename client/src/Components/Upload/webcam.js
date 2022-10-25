@@ -1,118 +1,86 @@
-import React, { useRef, useState } from 'react';
-import Webcam from 'react-webcam';
 import "./webcam.css"
-import FileUploadIcon from '@mui/icons-material/FileUpload';
-import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
-import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
-import Button from "@mui/material/Button"
-import ButtonGroup from "@mui/material/ButtonGroup"
+import React, { useRef, useState, useCallback } from 'react';
+import Webcam from 'react-webcam';
+import axios from "axios";
+import { Button, ButtonGroup } from "@mui/material"
+import { FileUpload, RefreshRounded, CameraAltOutlined } from '@mui/icons-material';
 import Navbar from '../Navbar/Navbar';
-function WebcamSample() {
 
+
+export default function WebcamSample() {
     const videoElement = useRef(null);
-
-    
-    const [url, setUrl] = React.useState(null);
-    
-    const capturePhoto = React.useCallback(async () => {
-    const imageSrc = videoElement.current.getScreenshot();
-        
-    setUrl(imageSrc); }, [videoElement]);
-
-    const onUserMedia = (e) => {
-    console.log(e);};
-
-    const videoConstraints = {
+    const [url, setUrl] = useState("");
+    const videoConstraints = useState({
         width: 450,
         height: 500,
         facingMode: "user"
-    }
+    });
     
-    const [isShowVideo, setIsShowVideo] = useState(true);
+    const onUserMedia = (e) => console.log(e);
 
-
-    const startCam = () => {
-        setIsShowVideo(true);
-    }
-
-    const stopCam = () => {
+    const capturePhoto = useCallback(async () => {
         let stream = videoElement.current.stream;
         const tracks = stream.getTracks();
-        tracks.forEach(track => track.stop());
-        setIsShowVideo(false);
-    }
+        await tracks.forEach(track => track.stop());
+        const imageSrc = videoElement.current.getScreenshot();
+        setUrl(imageSrc);
+    }, [videoElement]);
 
+
+    const refreshCapture = () => {
+        setUrl(null);
+    };
+
+    const uploadPhoto = () => {
+        console.log(url);
+        axios.post("http://localhost:3001/vision", {}).then((res) => {
+            console.log(res);
+        });
+        refreshCapture();
+    };
 
     return (
         <>
-        <Navbar></Navbar>
-        <div className="bigdiv">
-            <div id = "myDiv">
-             
+        <Navbar />
+        <div id="myDiv">
             <div id="camView" >
-                {isShowVideo &&
+                {url ? (
                     <Webcam 
-                    audio={false} 
-                    ref={videoElement} 
-                    videoConstraints={videoConstraints}
-                    onUserMedia={onUserMedia}
-                    screenshotFormat="image/png" 
-                    style={{borderRadius: '15px',}}/>
-                }
+                        audio={false} 
+                        ref={videoElement} 
+                        videoConstraints={videoConstraints}
+                        onUserMedia={onUserMedia}
+                        screenshotFormat="image/png" 
+                        style={{borderRadius: '15px',}}
+                    />
+                ) : (
+                    <img id="screengrab" src={url} alt="Screenshot" style={{borderRadius: '15px',}}/>
+                )}
             </div>
-            {url && (
-        <div id = "camView">
-        <img id = "screengrab" src={url} alt="Screenshot"   style={{borderRadius: '15px',}}/>
-        </div>
-      )}
-            <div className = "buttons">
-            <ButtonGroup  variant = "contained" >
-            <Button
-                onClick={() => {
-                    capturePhoto();
-                    stopCam();
-                  
-                }}
-                size = "small"
-                
-             >
-                Capture Image
-                {<CameraAltOutlinedIcon/>}
-             </Button>
-             
+            <div className="buttons">
+                <ButtonGroup variant="contained">
+                    <Button
+                        size="small"
+                        endIcon={<CameraAltOutlined />}
+                        onClick={() => capturePhoto()}
+                    >Capture Image</Button>
 
-             <Button
-                onClick={() => {
-                    setUrl(null)
-                    startCam();
-                  
-                }}   
-                size = "small"
-             >
-                Refresh
-                {<RefreshRoundedIcon />}
-             </Button>
+                    <Button
+                        size="small"
+                        endIcon={<RefreshRounded />}
+                        onClick={() => refreshCapture()}
+                    >Refresh</Button>
 
-             <Button
-                onClick={() => {
-                    setUrl(null)
-                    startCam();
-                  
-                }} 
-                size = "small"  
-             >
-                Upload
-                {<FileUploadIcon />}
-             </Button>
-
-             </ButtonGroup>
-             </div> 
-             </div>
-            
+                    {url &&
+                        <Button
+                            size="small"  
+                            endIcon={<FileUpload />}
+                            onClick={() => uploadPhoto()}
+                        >Upload</Button>
+                    }
+                </ButtonGroup>
+            </div> 
         </div>
         </>
     );
 };
-
-
-export default WebcamSample;
