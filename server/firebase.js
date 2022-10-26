@@ -61,7 +61,7 @@ async function checkUserExists(email) {
         if (document.data().email === email) {
             userExists = true;
         }
-        console.log(`Email: ${document.data().email}`);
+        // console.log(`Email: ${document.data().email}`);
       });
     });
 
