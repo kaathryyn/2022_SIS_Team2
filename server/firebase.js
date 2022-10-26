@@ -48,16 +48,40 @@ async function getUser(username) {
   let id = null;
   await firestore.collection("users").get().then(query => {
     query.forEach(document => {
-      if (document.data().Email === username) { user = document.data(); id = document.id; return; };
+      if (document.data().email === username) { user = document.data(); id = document.id; return; };
     });
   });
   return {user, id};
 }
 
+async function checkUserExists(email) {
+  let userExists = false;
+  await firestore.collection("users").get().then((query) => {
+      query.forEach((document) => {
+        if (document.data().email === email) {
+            userExists = true;
+        }
+        console.log(`Email: ${document.data().email}`);
+      });
+    });
+
+  return userExists;
+}
+
 async function addUser(user) {
   const { email, name, password } = user;
-  if (!(email && name && password)) return null;
-  if (getUser(email)) return null;
+  const userExists = await checkUserExists(email);
+  // console.log(`UserExists? ${userExists}`);
+
+  if (!(email && name && password)) {
+    console.log("Empty fields!");
+    return null;
+  }
+
+  if (userExists) {
+    console.log("User with this email already exists!");
+    return null;
+  }
 
   // user.password = encodeData(password);
   const res = await firestore.collection("users").add(user);
@@ -70,7 +94,7 @@ async function checkUser(credentials) {
   const { email, password } = credentials;
   if (!(email && password)) return null;
 
-  const {user, id} = await getUser(credentials.Email);
+  const {user, id} = await getUser(credentials.email);
   // console.log(encodeData(user.Password));
   if (credentials.Password === user.Password) { returnFlag = true };
   return returnFlag && id;
