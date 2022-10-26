@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { TextField } from "@mui/material";
 import logo from "../../Assets/Main-Logo.png";
-import { Link } from "react-router-dom";
-import './signup.css'
+import "./signup.css";
+
 function SignUp() {
     let history = useNavigate();
     const [email, setEmail] = useState("");
@@ -27,15 +30,15 @@ function SignUp() {
                 alert("Unable to sign up");
             });
     };
-    
-    return(
-      <div className="register-div">
-        <a href="/home">  
-          <img alt="Main Logo" src={logo} className="main-logo"></img>
-        </a>
-        <div className="register-card">
-            <form className="register-form">
-                <h1 className="register-header">Sign Up</h1>
+
+    return (
+        <div className="register-div">
+            <a href="/home">
+                <img alt="Main Logo" src={logo} className="main-logo"></img>
+            </a>
+            <div className="register-card">
+                <form className="register-form">
+                    <h1 className="register-header">Sign Up</h1>
                     <TextField
                         label="Name"
                         variant="standard"
@@ -66,10 +69,10 @@ function SignUp() {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
-                <button className="signup-button">Sign Up</button>
-            </form>
+                    <button className="signup-button" type="submit" onClick={onFinish}>Sign Up</button>
+                </form>
+            </div>
         </div>
-      </div>      
-    )       
+    );
 }
 export default SignUp;
