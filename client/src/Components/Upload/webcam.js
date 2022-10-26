@@ -32,11 +32,28 @@ export default function WebcamSample() {
     };
 
     const uploadPhoto = () => {
-        console.log(url);
-        axios.post("http://localhost:3001/vision", {image: url}).then((res) => {
+        const raw = url.replace("data:image/png;base64,", "");
+        const img = createBlob(base64ToArrayBuffer(raw));
+        var formData = new FormData();
+        formData.append("image", img);
+        axios.post("http://localhost:3001/vision", formData, { headers: {'Content-Type': 'multipart/form-data'} }).then((res) => {
             console.log(res);
         });
         refreshCapture();
+    };
+
+    const createBlob = (data) => {
+        return new Blob([data], {type: "application/octet-stream"});
+    };
+    
+    const base64ToArrayBuffer = (base64) => {
+        var binary_string = window.atob(base64);
+        var len = binary_string.length;
+        var bytes = new Uint8Array(len);
+        for (var i = 0; i < len; i++) {
+            bytes[i] = binary_string.charCodeAt(i);
+        }
+        return bytes.buffer;
     };
 
     return (
