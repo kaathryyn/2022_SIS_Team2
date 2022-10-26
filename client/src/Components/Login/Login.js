@@ -60,7 +60,7 @@ export default function Login(){
                     <div className="button-div">
                         <button className="login-button" type="submit" onClick={onFinish}>Login</button>
                         <Link to="/Signup">
-                            <button className="register-button">Register</button>
+                            <button className="register-button">Sign Up</button>
                         </Link>    
                     </div>
                 </form>
