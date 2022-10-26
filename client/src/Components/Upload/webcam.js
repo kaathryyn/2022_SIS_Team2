@@ -13,8 +13,8 @@ export default function WebcamSample() {
     const videoConstraints = useState({
         width: 450,
         height: 500,
-        facingMode: "user"
-    });
+        facingMode: "mirror"
+    }); 
     
     const onUserMedia = (e) => console.log(e);
 
@@ -33,7 +33,7 @@ export default function WebcamSample() {
 
     const uploadPhoto = () => {
         console.log(url);
-        axios.post("http://localhost:3001/vision", {}).then((res) => {
+        axios.post("http://localhost:3001/vision", {image: url}).then((res) => {
             console.log(res);
         });
         refreshCapture();
@@ -44,10 +44,11 @@ export default function WebcamSample() {
         <Navbar />
         <div id="myDiv">
             <div id="camView" >
-                {url ? (
+                {!url ? (
                     <Webcam 
                         audio={false} 
-                        ref={videoElement} 
+                        ref={videoElement}
+                        mirrored={true}
                         videoConstraints={videoConstraints}
                         onUserMedia={onUserMedia}
                         screenshotFormat="image/png" 
