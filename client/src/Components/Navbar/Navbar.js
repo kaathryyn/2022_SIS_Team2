@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     fontSize: "25px",
     marginLeft: theme.spacing(2),
-    "&:hover": { color: "yellow", borderBottom: "1px solid yellow" }
+    "&:hover": { color: "#DB972C", borderBottom: "1px solid #DB972C" }
   }
 }));
 
@@ -29,8 +29,9 @@ function Navbar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+  //Other potential navbar colors: e09552 42662e 355225 446034
   return (
-    <AppBar position="static">
+    <AppBar position="static" style={{backgroundColor:"#364d2a"}}>
       <CssBaseline />
       <Toolbar>
         <Typography variant="h4" className={classes.logo} >
