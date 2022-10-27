@@ -56,14 +56,43 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true})); // Change this for different HTTP bodies
 app.get('/', (req, res)=>{
     console.log(req.headers);
-    res.send("Welcome to your server");
+    return res.send("Welcome to your server");
 });
 
 // Retrieves all user photos
-app.get('/gallery', async(req, res) => {
-    const docId = req.body;
+app.post('/gallery', async(req, res) => {
+    const {docId} = req.body;
+    console.log(docId);
     if (docId.length === 20) {
         const result = await fb.getGallery(docId);
+
+        
+        const fs = require("fs");
+        // const readFile = util.promisify(fs.readFile);
+        const files = [...result];
+        files.forEach(file => {
+            console.log(file)
+            const path = require("path");
+            var dir = path.resolve(process.env.PUBLIC_LOC + "/" + docId);
+            if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+            fs.writeFileSync(dir + "/" + file.landmark + ".png", file.imageContent);
+        })
+
+        // var data = {};
+        // var fileNames = [];
+        // fileNames = readDir.readdirSync(path.resolve(process.env.PUBLIC_LOC));  // use async function instead of sync
+        // const files = fileNames.map(function (path) {
+        //     filepath = path.join(__dirname, process.env.PUBLIC_LOC) + '/' + path;
+        //     return readFile(filepath); //updated here
+        // });
+
+        // Promise.all(files).then(fileNames => {
+        //     response.data = fileNames;
+        //     res.json(response);
+        // }).catch(error => {
+        //     res.status(400).json(response);
+        // });
+
         return res.send(result);
     }
     res.status(400).send("Bad Request!");
