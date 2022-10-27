@@ -6,10 +6,25 @@ import { Button, ButtonGroup, Grid } from "@mui/material"
 import { FileUpload, RefreshRounded, CameraAltOutlined } from '@mui/icons-material';
 import Navbar from '../Navbar/Navbar';
 
+const createBlob = (data) => {
+    return new Blob([data], {type: "application/octet-stream"});
+};
+
+const base64ToArrayBuffer = (base64) => {
+    var binary_string = window.atob(base64);
+    var len = binary_string.length;
+    var bytes = new Uint8Array(len);
+    for (var i = 0; i < len; i++) {
+        bytes[i] = binary_string.charCodeAt(i);
+    }
+    return bytes.buffer;
+};
 
 export default function WebcamSample() {
     const videoElement = useRef(null);
     const [captureData, setCaptureData] = useState("");
+    const [landmark, setLandmark] = useState("");
+    const [polys, setPolys] = useState([]);
     const videoConstraints = useState({
         width: 450,
         height: 500,
@@ -36,51 +51,39 @@ export default function WebcamSample() {
         const buffer = base64ToArrayBuffer(raw);
         const blob = createBlob(buffer);
         const file = new File([blob], "test.png");
+
         var formData = new FormData();
         formData.append("image", file);
-        axios.post("http://localhost:3001/vision", formData, { headers: {'Content-Type': 'multipart/form-data'} }).then((res) => {
-            console.log(res.data);
-        });
+        UseVision(formData);
+
         refreshCapture();
     };
-
-    const createBlob = (data) => {
-        return new Blob([data], {type: "application/octet-stream"});
-    };
     
-    const base64ToArrayBuffer = (base64) => {
-        var binary_string = window.atob(base64);
-        var len = binary_string.length;
-        var bytes = new Uint8Array(len);
-        for (var i = 0; i < len; i++) {
-            bytes[i] = binary_string.charCodeAt(i);
-        }
-        return bytes.buffer;
-    };
-
-    const arrayBufferToBase64 = (buffer) => {
-        var binary = '';
-        var bytes = new Uint8Array(buffer);
-        var len = bytes.byteLength;
-        for (var i = 0; i < len; i++) {
-          binary += String.fromCharCode(bytes[i]);
-        }
-        return window.btoa(binary);
-    };
-
-    const handleUpload = () => {
-
-    };
-
     const handleInput = (event) => {
         const file = event.target.files[0];
         var formData = new FormData();
         formData.append("image", file);
-        axios.post("http://localhost:3001/vision", formData, { headers: {'Content-Type': 'multipart/form-data'} }).then((res) => {
-            console.log(res.data);
-        });
+        UseVision(formData);
+        
         document.getElementById("preview-image").src = (URL.createObjectURL(file));
-    }
+    };
+
+    const UseVision = useCallback((data) => {
+        axios.post("http://localhost:3001/vision", data, { headers: {'Content-Type': 'multipart/form-data'} }).then((res) => {
+            console.log(res.data);
+            const markName = res.data[0];
+            const regex = /[\\|\/|\-|\_]*$/;
+            setLandmark(markName.replace(regex, " "));
+
+            // var canvas = document.getElementById("preview-image");
+            // var ctx = canvas.getContext("2d");
+            // ctx.fillRect([res.data.slice(1)]);
+        });
+    }, []);
+
+    const handleUpload = () => {
+
+    };
 
     return (
         <>
@@ -98,6 +101,7 @@ export default function WebcamSample() {
                     textAlign: "center"
                 }}
             >
+                <div><h1>{landmark && landmark + " detected"}</h1></div>
                 <div id="camView" >
                     {!captureData ? (
                         <Webcam 
