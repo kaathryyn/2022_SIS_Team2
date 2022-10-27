@@ -59,6 +59,9 @@ function Navbar() {
             <Link to="/gallery" className={classes.link}>
               Gallery
             </Link>
+            <Link to="/login" className={classes.link} onClick={()=>localStorage.clear()}>
+              Logout
+            </Link>
           </div>
         )}
       </Toolbar>

@@ -12,7 +12,7 @@
 #camView{
 min-height: 50vh;
 max-height: 75vh;
-background-color: #133275;
+background-color: #364d2a;
 min-width: 75vw;
 padding-top: 0.2%;
 border-radius: 15px;
@@ -26,5 +26,10 @@ position:absolute;
   position: flex;
   margin-top:15%;
   position:absolute;
+}
+
+button {
+  border-color: #364d2a !important;
+  background-color: #688C40 !important;
 }
 
