@@ -2,14 +2,14 @@ import "./webcam.css"
 import React, { useRef, useState, useCallback } from 'react';
 import Webcam from 'react-webcam';
 import axios from "axios";
-import { Button, ButtonGroup } from "@mui/material"
+import { Button, ButtonGroup, Grid } from "@mui/material"
 import { FileUpload, RefreshRounded, CameraAltOutlined } from '@mui/icons-material';
 import Navbar from '../Navbar/Navbar';
 
 
 export default function WebcamSample() {
     const videoElement = useRef(null);
-    const [url, setUrl] = useState("");
+    const [captureData, setCaptureData] = useState("");
     const videoConstraints = useState({
         width: 450,
         height: 500,
@@ -23,21 +23,23 @@ export default function WebcamSample() {
         const tracks = stream.getTracks();
         await tracks.forEach(track => track.stop());
         const imageSrc = videoElement.current.getScreenshot();
-        setUrl(imageSrc);
+        setCaptureData(imageSrc);
     }, [videoElement]);
 
 
     const refreshCapture = () => {
-        setUrl(null);
+        setCaptureData(null);
     };
 
     const uploadPhoto = () => {
-        const raw = url.replace("data:image/png;base64,", "");
-        const img = createBlob(base64ToArrayBuffer(raw));
+        const raw = captureData.replace("data:image/png;base64,", "");
+        const buffer = base64ToArrayBuffer(raw);
+        const blob = createBlob(buffer);
+        console.log(new File(blob));
         var formData = new FormData();
-        formData.append("image", img);
+        formData.append("image", blob);
         axios.post("http://localhost:3001/vision", formData, { headers: {'Content-Type': 'multipart/form-data'} }).then((res) => {
-            console.log(res);
+            console.log(res.data);
         });
         refreshCapture();
     };
@@ -56,48 +58,99 @@ export default function WebcamSample() {
         return bytes.buffer;
     };
 
+    const arrayBufferToBase64 = (buffer) => {
+        var binary = '';
+        var bytes = new Uint8Array(buffer);
+        var len = bytes.byteLength;
+        for (var i = 0; i < len; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
+    };
+
+    const handleUpload = () => {
+
+    };
+
+    const handleInput = (event) => {
+        const file = event.target.files[0];
+        var formData = new FormData();
+        formData.append("image", file);
+        axios.post("http://localhost:3001/vision", formData, { headers: {'Content-Type': 'multipart/form-data'} }).then((res) => {
+            console.log(res.data);
+        });
+        document.getElementById("preview-image").src = (URL.createObjectURL(file));
+    }
+
     return (
         <>
         <Navbar />
         <div id="myDiv">
-            <div id="camView" >
-                {!url ? (
-                    <Webcam 
-                        audio={false} 
-                        ref={videoElement}
-                        mirrored={true}
-                        videoConstraints={videoConstraints}
-                        onUserMedia={onUserMedia}
-                        screenshotFormat="image/png" 
-                        style={{borderRadius: '15px',}}
-                    />
-                ) : (
-                    <img id="screengrab" src={url} alt="Screenshot" style={{borderRadius: '15px',}}/>
-                )}
-            </div>
-            <div className="buttons">
-                <ButtonGroup variant="contained">
-                    <Button
-                        size="small"
-                        endIcon={<CameraAltOutlined />}
-                        onClick={() => capturePhoto()}
-                    >Capture Image</Button>
-
-                    <Button
-                        size="small"
-                        endIcon={<RefreshRounded />}
-                        onClick={() => refreshCapture()}
-                    >Refresh</Button>
-
-                    {url &&
+            <Grid
+                container
+                direction={"column"}
+                sx = {{
+                    width: "100%",
+                    display: "flex",
+                    flexwrap: "wrap",
+                    justifyContent: "center",
+                    verticalAlign: "center",
+                    textAlign: "center"
+                }}
+            >
+                <div id="camView" >
+                    {!captureData ? (
+                        <Webcam 
+                            audio={false} 
+                            ref={videoElement}
+                            mirrored={true}
+                            videoConstraints={videoConstraints}
+                            onUserMedia={onUserMedia}
+                            screenshotFormat="image/png" 
+                            style={{borderRadius: '15px',}}
+                        />
+                    ) : (
+                        <img id="screengrab" src={captureData} alt="Screenshot" style={{borderRadius: '15px',}}/>
+                    )}
+                </div>
+                <div>
+                    <ButtonGroup variant="contained">
                         <Button
-                            size="small"  
-                            endIcon={<FileUpload />}
-                            onClick={() => uploadPhoto()}
-                        >Upload</Button>
-                    }
-                </ButtonGroup>
-            </div> 
+                            size="small"
+                            endIcon={<CameraAltOutlined />}
+                            onClick={() => capturePhoto()}
+                        >Capture Image</Button>
+
+                        <Button
+                            size="small"
+                            endIcon={<RefreshRounded />}
+                            onClick={() => refreshCapture()}
+                        >Refresh</Button>
+
+                        {captureData &&
+                            <Button
+                                size="small"  
+                                endIcon={<FileUpload />}
+                                onClick={() => uploadPhoto()}
+                            >Upload</Button>
+                        }
+                    </ButtonGroup>
+                </div> 
+                <div className="buttons">
+                    <ButtonGroup variant="contained">
+                        <Button
+                            variant="contained"
+                            component="label"
+                            sx = {{
+                                borderColor: "#364d2a !important",
+                                backgroundColor: "#688C40 !important",
+                            }}
+                        >Browse...<input type="file" accept=".jpg, .jpeg, .png, .bmp" onChange={(event) => handleInput(event)} hidden /></Button>
+                        <Button onClick={() => handleUpload()}>Submit</Button>
+                    </ButtonGroup>
+                </div>
+                <div><img id="preview-image"></img></div>
+            </Grid>
         </div>
         </>
     );

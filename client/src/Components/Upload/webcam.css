@@ -1,8 +1,8 @@
 #myDiv{
     /* background-image:url("../../Assets/Background.svg"); */
-    background-size: cover;
+    /* background-size: cover; */
     width: 100%;
-    height: 100vh;
+    /* height: 85vh; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,16 +16,16 @@ background-color: #364d2a;
 min-width: 75vw;
 padding-top: 0.2%;
 border-radius: 15px;
-margin-bottom: 15%;
-position:absolute;
+margin: 5rem;
+/* position:absolute; */
 }
 
 .buttons
 {
   padding-top: 1%;
   position: flex;
-  margin-top:15%;
-  position:absolute;
+  margin: 1rem;
+  /* position:absolute; */
 }
 
 button {

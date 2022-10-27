@@ -44,7 +44,7 @@ export default function Home() {
       binary += String.fromCharCode(bytes[i]);
     }
     return window.btoa(binary);
-};
+  };
   
   return (
     <div>

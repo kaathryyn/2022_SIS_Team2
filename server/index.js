@@ -91,9 +91,9 @@ app.post('/vision', upload.single("image"), async(req, res)=>{
         const file = req.file.filename;
         const loc = req.file.destination;
         const path = "./" + loc + "/" + file;
-        // const result = await vision.detectLandmark(path); // Commented to reduce usage
-        // res.send(result);
-        res.send("Done");
+        const result = await vision.detectLandmark(path); // Commented to reduce usage
+        res.send(result);
+        // res.send("Done");
     }
     catch { res.status(405).send("Failed to process request."); }
 });
