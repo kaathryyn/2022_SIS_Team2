@@ -22,6 +22,7 @@ async function detectLandmark(img) {
 
     var landmarkInfo = [];
     var landmarkVertices;
+    var landmarkName;
 
     const [result] = await client.landmarkDetection(img);
     const landmarks = result.landmarkAnnotations;
@@ -33,7 +34,10 @@ async function detectLandmark(img) {
         landmarkVertices = landmarks[0].boundingPoly.vertices;
 
         //Adding landmark name to landmarkInfo[0]
-        landmarkInfo.push(landmarks[0].description);
+        landmarkName = landmarks[0].description;
+        landmarkName = landmarkName.replace(/\s/g, '_').replace("'",'');
+        // console.log(`Landmark Name: ${landmarkName}`);
+        landmarkInfo.push(landmarkName);
 
         // Add Coords of Bounding Box to array - top_left > top_right > bottom_right > bottom_left
         for (let i = 0; i < 4; i++) {

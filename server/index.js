@@ -18,6 +18,7 @@ const cors = require("cors");
 const socketio = require('socket.io');
 const vision = require("./vision");
 const fb = require("./firebase");
+const wiki = require("./wikiAPI");
 
 //Initialise server
 const app = express();
@@ -70,7 +71,7 @@ app.get('/gallery', async(req, res) => {
 
 // Retrieves location data
 app.get('/landmark', async(req, res) => {
-
+    
 });
 
 // Runs Vision AI on incoming image
