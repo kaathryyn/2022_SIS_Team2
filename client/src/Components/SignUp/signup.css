@@ -41,6 +41,7 @@
 
 .last-name-div{
     margin-top: 0.1em;
+    width: 50%;
 }
 
 .last-name-label{
@@ -92,19 +93,41 @@
     margin-top: 0em;
 }
 
-.signup-button{
+.button-div{
+    display: inline-block;
+    flex-direction: column-reverse;
+
+}
+
+.signup2-button{
     background-color: #688C40;
     border: none;
     border-radius: 5px;
     color: black;
     min-width: 20%;
     height: 3.5em;
-    margin-top: 5%;
     font-size: 1em;
     font-weight: 200;
 }
 
-.signup-button:hover{
+.signup2-button:hover{
+    background-color: #4CAF50;
+    cursor:pointer
+}
+
+.login2-button{
+    background-color: #688C40;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    min-width: 20%;
+    height: 3.5em;
+    font-size: 1em;
+    font-weight: 200;
+    margin-left: 50px;
+}
+
+.login2-button:hover{
     background-color: #4CAF50;
     cursor:pointer
 }

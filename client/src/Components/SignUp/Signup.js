@@ -13,7 +13,8 @@ function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const onFinish = (e) => {
         e.preventDefault();
-        axios
+        if ( (password === confirmPassword) && (fullName.length > 0) && (email.length > 0)) {
+            axios
             .post("http://localhost:3001/signup", {
                 ...{
                     email: email,
@@ -27,21 +28,26 @@ function SignUp() {
             })
             .catch((err) => {
                 console.log(err);
-                alert("Unable to sign up");
+                alert("Unable to sign up!");
             });
+        } else {
+            console.log("Cannot create new user");
+            alert("Unable to sign up! Please ensure all fields have been filled and that passwords match.");
+        }
+        
     };
 
     return (
         <div className="register-div">
-            <a href="/home">
-                <img alt="Main Logo" src={logo} className="main-logo"></img>
-            </a>
+            <img alt="Main Logo" src={logo} className="main-logo"></img>
             <div className="register-card">
                 <form className="register-form">
                     <h1 className="register-header">Sign Up</h1>
                     <TextField
                         label="Name"
                         variant="standard"
+                        margin = "normal"
+                        autoFocus="true"
                         required
                         value={fullName}
                         onChange={(e) => setName(e.target.value)}
@@ -49,6 +55,8 @@ function SignUp() {
                     <TextField
                         label="Email"
                         variant="standard"
+                        margin = "normal"
+                        type={"email"}
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -56,6 +64,7 @@ function SignUp() {
                     <TextField
                         label="Password"
                         variant="standard"
+                        margin = "normal"
                         type={"password"}
                         required
                         value={password}
@@ -64,12 +73,18 @@ function SignUp() {
                     <TextField
                         label="Confirm Password"
                         variant="standard"
+                        margin = "normal"
                         type={"password"}
                         required
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
-                    <button className="signup-button" type="submit" onClick={onFinish}>Sign Up</button>
+                    <div className="button-div">
+                        <button className="signup2-button" type="submit" onClick={onFinish}>Sign Up</button>
+                        <Link to="/login">
+                            <button className="login2-button">Back to Login</button>
+                        </Link>
+                    </div>
                 </form>
             </div>
         </div>
