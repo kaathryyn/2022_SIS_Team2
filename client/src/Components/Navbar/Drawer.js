@@ -47,7 +47,7 @@ export default function DrawerComponent() {
       >
             <MenuItem divider = "true" dense = "true" component={Link} to="/home"> Home</MenuItem>
 
-            <MenuItem divider = "true" dense = "true" component={Link} to="/login" onClick={handleClose}> Login</MenuItem>
+            <MenuItem divider = "true" dense = "true" component={Link} to="/" onClick={handleClose}> Login</MenuItem>
 
             <MenuItem divider = "true" dense = "true" component={Link} to="/signup"> Signup</MenuItem>
 
