@@ -81,7 +81,7 @@ function SignUp() {
                     />
                     <div className="button-div">
                         <button className="signup2-button" type="submit" onClick={onFinish}>Sign Up</button>
-                        <Link to="/login">
+                        <Link to="/">
                             <button className="login2-button">Back to Login</button>
                         </Link>
                     </div>
