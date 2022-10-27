@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import DrawerComponent from "./Drawer.js";
 
 const useStyles = makeStyles((theme) => ({
-  navlinks: { marginLeft: theme.spacing(135), display: "flex", },
+  navlinks: { marginLeft: theme.spacing(10), display: "flex", },
   logo: { flexGrow: "1", cursor: "pointer", display: "static",},
   link: {
     textDecoration: "none",
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 function Navbar() {
   const classes = useStyles();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   //Other potential navbar colors: e09552 42662e 355225 446034
   return (

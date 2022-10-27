@@ -17,66 +17,84 @@ import "./homepage.css"
 function Home() {
   
   return (
-    <React.Fragment>
+    <div>
       <Navbar/>
-      <div className = "outerdiv">
-      <Grid sx = {{
-        backgroundColor: "green",
-        alignItems: "flex-end"
-      }}>
-      </Grid>
-      <Box
-        sx={{
+      <div
+        className = "outerdiv"
+        style={{
           display: 'flex',
           flexWrap: 'wrap',
-          borderColor: 'error.main',
-          
-          '& > :not(style)': {
-            m: 1,
-            width: 900,
-            height: 600,
-          },
+          justifyContent: "center",
         }}
       >
-      <Button style={{maxWidth: '155px', maxHeight: '50px', minWidth: '155px', minHeight: '50px', backgroundColor: "#688C40",}}  component={Link} to="/camera" variant="contained" endIcon={<PhotoCamera />} >
-      Vision API
-      </Button>
-      <ImageList sx={{ 
-        display: 'static',
-        
-        '&::-webkit-scrollbar': { 
-        width: 0,
-        },
-      }}>
-      <ImageListItem key="Subheader" cols={2}>
-        <ListSubheader component="div" backgroundColor = "blue">
-          <Typography
-            variant="h6"
-            color="textPrimary"
-            component="span"
-            backgroundColor="transparent"
+        <Grid
+          container
+          columnSpacing={5}
+          sx = {{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: "center",
+            verticalAlign: "center",
+          }}
+        >
+          <Grid
+            item
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: "center",
+              borderColor: 'error.main',
+              
+              '& > :not(style)': {
+                m: 1,
+                width: "75vw",
+                height: "85vh",
+              },
+            }}
           >
-            Images scanned using Monument.io
-          </Typography>
-        </ListSubheader>
-      </ImageListItem>
-      {itemData.map((item) => (
-        <ImageListItem key={item.img}>
-          <img
-            src={`${item.img}?w=248&fit=contain&auto=format`}
-            srcSet={`${item.img}?w=248&fit=contain&auto=format&dpr=2 2x`}
-            alt={item.title}
-            loading="lazy"
-            onClick
-          />
-          <ImageListItemBar title={item.title} />
-        </ImageListItem>
-      ))}
-    </ImageList>
-    
-    </Box>
-    </div>  
-  </React.Fragment> )
+            <ImageList sx={{ 
+              display: 'static',
+              
+              '&::-webkit-scrollbar': { 
+              width: 0,
+              },
+            }}>
+              {itemData.map((item) => (
+                <ImageListItem key={item.img}>
+                  <img
+                    src={`${item.img}?w=248&fit=contain&auto=format`}
+                    srcSet={`${item.img}?w=248&fit=contain&auto=format&dpr=2 2x`}
+                    alt={item.title}
+                    loading="lazy"
+                    onClick
+                  />
+                  <ImageListItemBar title={item.title} />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          </Grid>
+          <Grid
+            item
+            sx = {{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: "center",
+              padding: "1rem",
+            }}
+          >
+            <Button
+              variant="contained"
+              endIcon={<PhotoCamera />}
+              component={Link} to="/camera"
+              style={{maxWidth: '155px', maxHeight: '50px', minWidth: '155px', minHeight: '50px', backgroundColor: "#688C40",}}
+            >
+              Upload
+            </Button>
+          </Grid>
+        </Grid>
+      </div>  
+    </div>
+  )
 }
 
 export default Home; 
