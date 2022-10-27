@@ -35,9 +35,9 @@ export default function WebcamSample() {
         const raw = captureData.replace("data:image/png;base64,", "");
         const buffer = base64ToArrayBuffer(raw);
         const blob = createBlob(buffer);
-        console.log(new File(blob));
+        const file = new File([blob], "test.png");
         var formData = new FormData();
-        formData.append("image", blob);
+        formData.append("image", file);
         axios.post("http://localhost:3001/vision", formData, { headers: {'Content-Type': 'multipart/form-data'} }).then((res) => {
             console.log(res.data);
         });
