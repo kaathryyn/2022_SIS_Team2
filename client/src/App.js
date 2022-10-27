@@ -11,7 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/gallery" element={<PhotoGallery/>} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
@@ -20,7 +20,7 @@ function App() {
         <Route
           exact path="/*"
           element={
-            true
+            localStorage.getItem("user")
             ? (<Sandbox />)
             : (<Navigate replace to="/login" />)
           } 
