@@ -24,7 +24,6 @@ export default function WebcamSample() {
     const videoElement = useRef(null);
     const [captureData, setCaptureData] = useState("");
     const [landmark, setLandmark] = useState("");
-    const [polys, setPolys] = useState([]);
     const videoConstraints = useState({
         width: 450,
         height: 500,
@@ -39,6 +38,16 @@ export default function WebcamSample() {
         await tracks.forEach(track => track.stop());
         const imageSrc = videoElement.current.getScreenshot();
         setCaptureData(imageSrc);
+
+        const raw = captureData.replace("data:image/png;base64,", "");
+        const buffer = base64ToArrayBuffer(raw);
+        const blob = createBlob(buffer);
+        const file = new File([blob], "test.png");
+
+        var formData = new FormData();
+        formData.append("image", file);
+        UseVision(formData, "screengrab");
+
     }, [videoElement]);
 
 
@@ -54,30 +63,40 @@ export default function WebcamSample() {
 
         var formData = new FormData();
         formData.append("image", file);
-        UseVision(formData);
+        UseVision(formData, "screengrab");
 
         refreshCapture();
     };
     
     const handleInput = (event) => {
         const file = event.target.files[0];
+        document.getElementById("preview-image").src = (URL.createObjectURL(file));
+        
         var formData = new FormData();
         formData.append("image", file);
-        UseVision(formData);
+        UseVision(formData, "preview-canvas", document.getElementById("preview-image"));
         
-        document.getElementById("preview-image").src = (URL.createObjectURL(file));
     };
 
-    const UseVision = useCallback((data) => {
+    const UseVision = useCallback((data, target, img="") => {
+        setLandmark(null);
         axios.post("http://localhost:3001/vision", data, { headers: {'Content-Type': 'multipart/form-data'} }).then((res) => {
-            console.log(res.data);
-            const markName = res.data[0];
-            const regex = /[\\|\/|\-|\_]*$/;
-            setLandmark(markName.replace(regex, " "));
+            var regex = /\_/g
+            const markName = res.data[0].replace(regex, " ");
+            setLandmark(markName);
 
-            // var canvas = document.getElementById("preview-image");
-            // var ctx = canvas.getContext("2d");
-            // ctx.fillRect([res.data.slice(1)]);
+            var poly = res.data.slice(1);
+            console.log(poly, poly[0], poly[3], poly[0][1])
+            var canvas = document.getElementById(target);
+            canvas.width = img.width;
+            canvas.height = img.height;
+            var ctx = canvas.getContext("2d");
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0);
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = 3;
+            ctx.strokeRect(poly[0][0], poly[0][1], poly[2][0]-poly[0][0], poly[2][1]-poly[0][1]);
         });
     }, []);
 
@@ -101,7 +120,6 @@ export default function WebcamSample() {
                     textAlign: "center"
                 }}
             >
-                <div><h1>{landmark && landmark + " detected"}</h1></div>
                 <div id="camView" >
                     {!captureData ? (
                         <Webcam 
@@ -114,7 +132,7 @@ export default function WebcamSample() {
                             style={{borderRadius: '15px',}}
                         />
                     ) : (
-                        <img id="screengrab" src={captureData} alt="Screenshot" style={{borderRadius: '15px',}}/>
+                        <img id="screengrab" src={captureData} style={{borderRadius: '15px',}}/>
                     )}
                 </div>
                 <div>
@@ -153,7 +171,8 @@ export default function WebcamSample() {
                         <Button onClick={() => handleUpload()}>Submit</Button>
                     </ButtonGroup>
                 </div>
-                <div><img id="preview-image"></img></div>
+                <div><h1>{(landmark || "No landmark") + " detected"}</h1></div>
+                <div><img id="preview-image" hidden></img><canvas id="preview-canvas"></canvas></div>
             </Grid>
         </div>
         </>
