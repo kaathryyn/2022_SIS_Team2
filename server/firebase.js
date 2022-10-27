@@ -95,8 +95,9 @@ async function checkUser(credentials) {
   if (!(email && password)) return null;
 
   const {user, id} = await getUser(credentials.email);
+  // console.log(`Credentials.password: ${credentials.password}, user.password: ${user.password}`);
   // console.log(encodeData(user.Password));
-  if (credentials.Password === user.Password) { returnFlag = true };
+  if (credentials.password === user.password) { returnFlag = true };
   return returnFlag && id;
 }
 
