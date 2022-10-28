@@ -29,20 +29,15 @@ export default function Login(){
 
     return(
         <div className="login-div">
-            
-              <a href="/home">  
-            <img
-                alt="Main Logo"
-                src={logo}
-                className="main-logo"    
-            ></img>
-            </a>
+            <img alt="Main Logo" src={logo} className="main-logo"></img>
             <div className="login-card">
                 <form className="login-form">
                     <h1 className="form-header"> Login</h1>
                     <TextField
                         label="Email"
+                        autoFocus="true"
                         variant="standard"
+                        margin ="normal"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -50,13 +45,13 @@ export default function Login(){
                     <TextField
                         label="Password"
                         variant="standard"
+                        margin ="normal"
                         type={"password"}
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <Link to="/forgotpassword"
-                        className="forgot-password"> Forgot Password?</Link>
+                    <Link to="/forgotpassword" className="forgot-password"> Forgot Password?</Link>
                     <div className="button-div">
                         <button className="login-button" type="submit" onClick={onFinish}>Login</button>
                         <Link to="/Signup">

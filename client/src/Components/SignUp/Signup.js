@@ -23,8 +23,8 @@ function SignUp() {
                 },
             })
             .then((res) => {
-                localStorage.setItem("user", res.data);
-                history("/");
+                // localStorage.setItem("user", res.data); //let them sign in after sign up
+                history("/login");
             })
             .catch((err) => {
                 console.log(err);

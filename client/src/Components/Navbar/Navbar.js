@@ -50,7 +50,7 @@ function Navbar() {
             <Link to="/home" className={classes.link}>
               Home
             </Link>
-            {/* <Link to="/" className={classes.link}>
+            {/* <Link to="/login" className={classes.link}>
               Login
             </Link>
             <Link to="/signup" className={classes.link}>
@@ -59,7 +59,7 @@ function Navbar() {
             <Link to="/gallery" className={classes.link}>
               Gallery
             </Link>
-            <Link to="/" className={classes.link} onClick={()=>localStorage.clear()}>
+            <Link to="/login" className={classes.link} onClick={()=>localStorage.clear()}>
               Logout
             </Link>
           </div>
