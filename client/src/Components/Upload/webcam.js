@@ -77,7 +77,6 @@ export default function WebcamSample() {
         formData.append("image", file);
         document.getElementById("preview-image").src = (URL.createObjectURL(file));
         UseVision(formData, "preview-canvas", document.getElementById("preview-image"));
-        
     };
 
     const UseVision = useCallback((data, target, img="") => {
@@ -111,8 +110,26 @@ export default function WebcamSample() {
         });
     }, []);
 
-    const handleUpload = () => {
+    const handleUpload = async (target) => {
+        if (!target) return;
+        var img = document.getElementById(target);
+        var file = await fetch(img.src)
+            .then(res => res.blob())
+            .then(blob => { return new File([blob], 'upload.png', blob) });
 
+        console.log(file);
+        var formData = new FormData();
+        formData.append("image", file);
+        formData.append("id", localStorage.getItem("user"));
+        formData.append("landmark", landmark);
+        axios
+            .post("http://localhost:3001/upload", formData, {headers: {'Content-Type': 'multipart/form-data'}})
+            .then((res) => {
+                console.log(res.data)
+            })
+            .catch((e) => {
+                console.log(e);
+            })
     };
 
     return (
@@ -167,7 +184,7 @@ export default function WebcamSample() {
                             <Button
                                 size="small"  
                                 endIcon={<FileUpload />}
-                                onClick={() => uploadPhoto()}
+                                onClick={() => handleUpload("camera-image")}
                             >Upload</Button>
                         }
                     </ButtonGroup>
@@ -182,7 +199,7 @@ export default function WebcamSample() {
                                 backgroundColor: "#688C40 !important",
                             }}
                         >Browse...<input type="file" accept=".jpg, .jpeg, .png, .bmp" onChange={(event) => handleInput(event)} hidden /></Button>
-                        <Button onClick={() => handleUpload()}>Submit</Button>
+                        <Button onClick={() => handleUpload("preview-image")}>Upload</Button>
                     </ButtonGroup>
                 </div>
                 <div><h1>{(landmark || "No landmark") + " detected"}</h1></div>

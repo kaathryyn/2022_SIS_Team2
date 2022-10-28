@@ -28,7 +28,7 @@ export default function Home() {
         // });
         var images = [...res.data];
         images.forEach((img, index) => {
-          images[index].src = "http://localhost:3001/" + user + "/" + img.landmark + ".png";
+          images[index].src = "http://localhost:3001/" + user + "/" + img.dateCreated + ".png";
         });
         setItemData(images);
       })

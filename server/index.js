@@ -72,7 +72,7 @@ app.post('/gallery', async(req, res) => {
             const path = require("path");
             var dir = path.resolve(process.env.PUBLIC_LOC + "/" + docId);
             if (!fs.existsSync(dir)) fs.mkdirSync(dir);
-            fs.writeFileSync(dir + "/" + file.landmark + ".png", file.imageContent);
+            fs.writeFileSync(dir + "/" + file.dateCreated + ".png", file.imageContent);
         })
 
         return res.send(result);
