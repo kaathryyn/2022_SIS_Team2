@@ -46,7 +46,8 @@ export default function WebcamSample() {
 
         var formData = new FormData();
         formData.append("image", file);
-        UseVision(formData, "screengrab");
+        // document.getElementById("camera-image").src = (URL.createObjectURL(file));
+        UseVision(formData, "camera-canvas");
 
     }, [videoElement]);
 
@@ -63,17 +64,18 @@ export default function WebcamSample() {
 
         var formData = new FormData();
         formData.append("image", file);
-        UseVision(formData, "screengrab");
+        // document.getElementById("camera-image").src = (URL.createObjectURL(file));
+        UseVision(formData, "camera-canvas");
 
         refreshCapture();
     };
     
     const handleInput = (event) => {
         const file = event.target.files[0];
-        document.getElementById("preview-image").src = (URL.createObjectURL(file));
         
         var formData = new FormData();
         formData.append("image", file);
+        document.getElementById("preview-image").src = (URL.createObjectURL(file));
         UseVision(formData, "preview-canvas", document.getElementById("preview-image"));
         
     };
@@ -81,12 +83,12 @@ export default function WebcamSample() {
     const UseVision = useCallback((data, target, img="") => {
         setLandmark(null);
         axios.post("http://localhost:3001/vision", data, { headers: {'Content-Type': 'multipart/form-data'} }).then((res) => {
-            var regex = /\_/g
+            if (!res.data[0]) throw "No landmark";
+            var regex = /\_/g;
             const markName = res.data[0].replace(regex, " ");
             setLandmark(markName);
 
             var poly = res.data.slice(1);
-            console.log(poly, poly[0], poly[3], poly[0][1])
             var canvas = document.getElementById(target);
             canvas.width = img.width;
             canvas.height = img.height;
@@ -97,6 +99,15 @@ export default function WebcamSample() {
             ctx.strokeStyle = "red";
             ctx.lineWidth = 3;
             ctx.strokeRect(poly[0][0], poly[0][1], poly[2][0]-poly[0][0], poly[2][1]-poly[0][1]);
+        })
+        .catch(() => {
+            var canvas = document.getElementById(target);
+            canvas.width = img.width;
+            canvas.height = img.height;
+            var ctx = canvas.getContext("2d");
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0);
         });
     }, []);
 
@@ -132,7 +143,10 @@ export default function WebcamSample() {
                             style={{borderRadius: '15px',}}
                         />
                     ) : (
-                        <img id="screengrab" src={captureData} style={{borderRadius: '15px',}}/>
+                        <div>
+                            <img id="camera-image" src={captureData} style={{borderRadius: '15px',}}/>
+                            {/* <canvas id="camera-canvas" /> */}
+                        </div>
                     )}
                 </div>
                 <div>
@@ -172,7 +186,7 @@ export default function WebcamSample() {
                     </ButtonGroup>
                 </div>
                 <div><h1>{(landmark || "No landmark") + " detected"}</h1></div>
-                <div><img id="preview-image" hidden></img><canvas id="preview-canvas"></canvas></div>
+                <div><img id="preview-image" hidden /><canvas id="preview-canvas" /></div>
             </Grid>
         </div>
         </>
