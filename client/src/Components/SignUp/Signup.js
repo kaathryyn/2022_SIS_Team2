@@ -24,7 +24,7 @@ function SignUp() {
             })
             .then((res) => {
                 localStorage.setItem("user", res.data);
-                history("/login");
+                history("/");
             })
             .catch((err) => {
                 console.log(err);
