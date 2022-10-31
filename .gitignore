@@ -1,6 +1,7 @@
 node_modules
 package-lock.json
 package.json
+firebase_key.json
 /server/GCP_CREDS.json
 /client/package-lock.json
 /client/package.json
